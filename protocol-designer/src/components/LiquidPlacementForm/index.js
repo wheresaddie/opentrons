@@ -2,14 +2,10 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import assert from 'assert'
-import {
-  removeWellsContents,
-  setWellContents,
-} from '../../labware-ingred/actions'
+import {removeWellsContents, setWellContents} from '../../labware-ingred/actions'
 import {selectors as labwareIngredSelectors} from '../../labware-ingred/reducers'
+import type {Wells} from '../../labware-ingred/types'
 import * as wellContentsSelectors from '../../top-selectors/well-contents'
-import wellSelectionSelectors from '../../well-selection/selectors'
-import {deselectAllWells} from '../../well-selection/actions'
 import LiquidPlacementForm from './LiquidPlacementForm'
 import type {Dispatch} from 'redux'
 import type {ValidFormValues} from './LiquidPlacementForm'
@@ -17,6 +13,10 @@ import type {BaseState} from '../../types'
 
 type Props = React.ElementProps<typeof LiquidPlacementForm>
 
+type OP = {
+  selectedWells: Wells,
+  deselectAll: () => mixed,
+}
 type DP = {
   cancelForm: $PropertyType<Props, 'cancelForm'>,
   clearWells: $PropertyType<Props, 'clearWells'>,
@@ -29,8 +29,8 @@ type SP = $Diff<Props, DP> & {
   _selectionHasLiquids: boolean,
 }
 
-function mapStateToProps (state: BaseState): SP {
-  const selectedWells = Object.keys(wellSelectionSelectors.getSelectedWells(state))
+function mapStateToProps (state: BaseState, ownProps: OP): SP {
+  const selectedWells = Object.keys(ownProps.selectedWells || {}) // Object.keys(wellSelectionSelectors.getSelectedWells(state))
 
   const _labwareId = labwareIngredSelectors.getSelectedLabwareId(state)
   const liquidLocations = labwareIngredSelectors.getLiquidsByLabwareId(state)
@@ -53,7 +53,7 @@ function mapStateToProps (state: BaseState): SP {
   }
 }
 
-function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}): Props {
+function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}, ownProps: OP): Props {
   const {_labwareId, _selectedWells, _selectionHasLiquids, ...passThruProps} = stateProps
   const {dispatch} = dispatchProps
 
@@ -71,7 +71,7 @@ function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}): Pr
 
   return {
     ...passThruProps,
-    cancelForm: () => dispatch(deselectAllWells()),
+    cancelForm: ownProps.deselectAll,
     clearWells,
     saveForm: (values: ValidFormValues) => {
       const volume = Number(values.volume)
@@ -93,6 +93,7 @@ function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}): Pr
           wells: _selectedWells || [],
           volume: Number(values.volume),
         }))
+        ownProps.deselectAll()
       }
     },
   }

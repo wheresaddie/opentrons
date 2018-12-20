@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import type {Dispatch} from 'redux'
 import cx from 'classnames'
 import isEmpty from 'lodash/isEmpty'
+import omit from 'lodash/omit'
 
 import styles from './LiquidPlacementModal.css'
 
@@ -15,11 +16,6 @@ import WellSelectionInstructions from './WellSelectionInstructions'
 
 import {selectors} from '../labware-ingred/reducers'
 import * as wellContentsSelectors from '../top-selectors/well-contents'
-import wellSelectionSelectors from '../well-selection/selectors'
-import {
-  selectWells,
-  deselectWells,
-} from '../well-selection/actions'
 
 import type {BaseState} from '../types'
 import type {WellIngredientNames} from '../steplist'
@@ -30,38 +26,48 @@ type SP = {
   containerType: string,
   liquidNamesById: WellIngredientNames,
 }
-type DP = {
-  selectWells: (Wells) => mixed,
-  deselectWells: (Wells) => mixed,
+
+type State = {
+  highlightedWells: Wells,
+  selectedWells: Wells,
 }
-type Props = SP & DP
 
-type State = {highlightedWells: Wells}
-
-class LiquidPlacementModal extends React.Component<Props, State> {
+class LiquidPlacementModal extends React.Component<SP, State> {
   state = {highlightedWells: {}}
   constructor (props) {
     super(props)
-    this.state = {highlightedWells: {}}
+    this.state = {highlightedWells: {}, selectedWells: {}}
   }
 
   updateHighlightedWells = (wells: Wells) => {
     this.setState({highlightedWells: wells})
   }
 
+  selectWells = (wells: Wells) => {
+    this.setState({selectedWells: {...this.state.selectedWells, ...wells}})
+  }
+  deselectWells = (wells: Wells) => {
+    this.setState({selectedWells: omit(this.state.selectedWells, Object.keys(wells))})
+  }
+  deselectAll = () => {
+    this.setState({selectedWells: {}})
+  }
+
   render () {
     return (
-      <div className={cx(styles.liquid_placement_modal, {[styles.expanded]: !isEmpty(this.props.selectedWells)})}>
-        <LiquidPlacementForm />
+      <div className={cx(styles.liquid_placement_modal, {[styles.expanded]: !isEmpty(this.state.selectedWells)})}>
+        <LiquidPlacementForm
+          deselectAll={this.deselectAll}
+          selectedWells={this.state.selectedWells} />
 
         <SingleLabwareWrapper showLabels>
           <SelectableLabware
             wellContents={this.props.wellContents}
             containerType={this.props.containerType}
-            selectedWells={this.props.selectedWells}
+            selectedWells={this.state.selectedWells}
             highlightedWells={this.state.highlightedWells}
-            selectWells={this.props.selectWells}
-            deselectWells={this.props.deselectWells}
+            selectWells={this.selectWells}
+            deselectWells={this.deselectWells}
             updateHighlightedWells={this.updateHighlightedWells}
             ingredNames={this.props.liquidNamesById} />
         </SingleLabwareWrapper>
@@ -74,15 +80,9 @@ class LiquidPlacementModal extends React.Component<Props, State> {
 
 const mapStateToProps = (state: BaseState): SP => {
   const containerId = selectors.getSelectedLabwareId(state)
-  const selectedWells = wellSelectionSelectors.getSelectedWells(state)
   if (containerId === null) {
     console.error('LiquidPlacementModal: No labware is selected, and no labwareId was given to LiquidPlacementModal')
-    return {
-      selectedWells: {},
-      wellContents: {},
-      containerType: '',
-      liquidNamesById: {},
-    }
+    return {wellContents: {}, containerType: '', liquidNamesById: {}}
   }
 
   const labware = selectors.getLabwareById(state)[containerId]
@@ -92,16 +92,10 @@ const mapStateToProps = (state: BaseState): SP => {
   wellContents = wellContentsSelectors.getWellContentsAllLabware(state)[containerId]
 
   return {
-    selectedWells,
     wellContents,
     containerType: labware ? labware.type : 'missing labware',
     liquidNamesById: selectors.getLiquidNamesById(state),
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<*>): DP => ({
-  deselectWells: (wells) => dispatch(deselectWells(wells)),
-  selectWells: (wells) => dispatch(selectWells(wells)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LiquidPlacementModal)
+export default connect(mapStateToProps)(LiquidPlacementModal)
