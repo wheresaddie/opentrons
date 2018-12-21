@@ -17,6 +17,10 @@ type DP = {
 
 type SP = $Diff<Props, DP> & {_labwareId: ?string}
 
+// TODO: BC: 2018-12-21 figure out how to get commonIngredId now that it's not it redux
+// should we put a shim in the ui branch, just so this one list item can have an active state
+// or do we not worry about this as we're probably revisiting the visual hierarchy of
+// the liquidPlacementModal and Form soon?
 function mapStateToProps (state: BaseState): SP {
   const container = selectors.getSelectedLabware(state)
   const _labwareId = container && container.id

@@ -69,7 +69,6 @@ function mapStateToProps (state: BaseState, ownProps: OP): SP {
       : null
 
     // shows liquids the current step in timeline
-    const selectedWells = wellSelectionSelectors.getSelectedWells(state)
     let wellContentsWithoutHighlight = null
     let highlightedWells
 
@@ -103,7 +102,6 @@ function mapStateToProps (state: BaseState, ownProps: OP): SP {
       (wellContentsForWell: WellContents, well: string): WellContents => ({
         ...wellContentsForWell,
         highlighted: Boolean(highlightedWells[well]),
-        selected: Boolean(selectedWells[well]),
       })
     ): ContentsByWell)
   }

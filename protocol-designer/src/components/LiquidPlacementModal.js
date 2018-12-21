@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import {connect} from 'react-redux'
-import type {Dispatch} from 'redux'
 import cx from 'classnames'
 import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
@@ -16,6 +15,7 @@ import WellSelectionInstructions from './WellSelectionInstructions'
 
 import {selectors} from '../labware-ingred/reducers'
 import * as wellContentsSelectors from '../top-selectors/well-contents'
+import {getSelectedWellsCommonValues} from '../well-selection/utils'
 
 import type {BaseState} from '../types'
 import type {WellIngredientNames} from '../steplist'
@@ -50,26 +50,15 @@ class LiquidPlacementModal extends React.Component<SP, State> {
   }
 
   render () {
-    const {wellContents} = this.props
     const {selectedWells} = this.state
-    let commonSelectedLiquidId = null
-
-    if (!isEmpty(wellContents) && !isEmpty(selectedWells)) {
-      const firstSelectedWell = Object.keys(selectedWells)[0]
-      const liquidIds = wellContents[firstSelectedWell] ? Object.keys(wellContents[firstSelectedWell].ingreds) : []
-      const firstSelectedLiquidId = liquidIds[0] || null
-      const hasCommonSelectedLiquidId = Object.keys(selectedWells).every(well => {
-        const ingreds = wellContents[well].ingreds ? Object.keys(wellContents[well].ingreds) : []
-        return ingreds.length === 1 && ingreds[0] === firstSelectedLiquidId
-      })
-      commonSelectedLiquidId = hasCommonSelectedLiquidId ? firstSelectedLiquidId : null
-    }
+    const commonSelectedValues = getSelectedWellsCommonValues(this.props.wellContents, this.state.selectedWells)
+    const {commonSelectedLiquidId, commonSelectedVolume} = commonSelectedValues
 
     return (
       <div className={cx(styles.liquid_placement_modal, {[styles.expanded]: !isEmpty(selectedWells)})}>
         <LiquidPlacementForm
           commonSelectedLiquidId={commonSelectedLiquidId}
-          // initialVolume={commonSelectedLiquidId}
+          commonSelectedVolume={commonSelectedVolume}
           deselectAll={this.deselectAll}
           selectedWells={selectedWells} />
 

@@ -30,25 +30,23 @@ type SP = $Diff<Props, DP> & {
 }
 
 function mapStateToProps (state: BaseState, ownProps: OP): SP {
-  const selectedWells = Object.keys(ownProps.selectedWells || {}) // Object.keys(wellSelectionSelectors.getSelectedWells(state))
+  const _selectedWells = Object.keys(ownProps.selectedWells || {})
 
   const _labwareId = labwareIngredSelectors.getSelectedLabwareId(state)
   const liquidLocations = labwareIngredSelectors.getLiquidsByLabwareId(state)
   const _selectionHasLiquids = Boolean(
     _labwareId &&
     liquidLocations[_labwareId] &&
-    selectedWells.some(well => liquidLocations[_labwareId][well])
+    _selectedWells.some(well => liquidLocations[_labwareId][well])
   )
 
   return {
-    // commonSelectedLiquidId: wellContentsSelectors.getSelectedWellsCommonIngredId(state),
-    commonSelectedVolume: wellContentsSelectors.getSelectedWellsCommonVolume(state),
     liquidSelectionOptions: labwareIngredSelectors.getLiquidSelectionOptions(state),
-    showForm: selectedWells.length > 0,
+    showForm: _selectedWells.length > 0,
     selectedWellsMaxVolume: wellContentsSelectors.getSelectedWellsMaxVolume(state),
 
     _labwareId,
-    _selectedWells: selectedWells,
+    _selectedWells,
     _selectionHasLiquids,
   }
 }
@@ -65,6 +63,7 @@ function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}, own
           labwareId: _labwareId,
           wells: _selectedWells,
         }))
+        ownProps.deselectAll()
       }
     }
     : null
@@ -72,6 +71,7 @@ function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}, own
   return {
     ...passThruProps,
     commonSelectedLiquidId: ownProps.commonSelectedLiquidId,
+    commonSelectedVolume: ownProps.commonSelectedVolume,
     cancelForm: ownProps.deselectAll,
     clearWells,
     saveForm: (values: ValidFormValues) => {

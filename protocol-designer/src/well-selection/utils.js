@@ -1,8 +1,9 @@
 // @flow
 import flatten from 'lodash/flatten'
 import memoize from 'lodash/memoize'
+import isEmpty from 'lodash/isEmpty'
 import {computeWellAccess, getLabware} from '@opentrons/shared-data'
-import type {Wells} from '../labware-ingred/types'
+import type {Wells, ContentsByWell} from '../labware-ingred/types'
 
 type WellSetByWell = Array<Array<string>>
 
@@ -59,4 +60,27 @@ export function wellSetToWellObj (wellSet: ?Array<string>): Wells {
   return wellSet
     ? wellSet.reduce((acc: Wells, well: string) => ({...acc, [well]: well}), {})
     : {}
+}
+
+export const getSelectedWellsCommonValues = (wellContents: ContentsByWell, selectedWells: Wells) => {
+  let commonSelectedLiquidId = null
+  let commonSelectedVolume = null
+  if (!isEmpty(wellContents) && !isEmpty(selectedWells)) {
+    const firstSelectedWell = Object.keys(selectedWells)[0]
+    const volumesByLiquidId = (wellContents[firstSelectedWell] && wellContents[firstSelectedWell].ingreds) || {}
+    const firstSelectedLiquidId = Object.keys(volumesByLiquidId)[0] || null
+    const firstSelectedVolume = firstSelectedLiquidId && volumesByLiquidId[firstSelectedLiquidId].volume
+
+    const hasCommonSelectedLiquidId = Object.keys(selectedWells).every(well => {
+      const ingreds = (wellContents[well] && wellContents[well].ingreds) ? Object.keys(wellContents[well].ingreds) : []
+      return ingreds.length === 1 && ingreds[0] === firstSelectedLiquidId
+    })
+    const hasCommonSelectedVolume = Object.keys(selectedWells).every(well => {
+      if (!(wellContents[well] && wellContents[well].ingreds && wellContents[well].ingreds[firstSelectedLiquidId])) return false
+      return wellContents[well].ingreds[firstSelectedLiquidId].volume === firstSelectedVolume
+    })
+    commonSelectedLiquidId = hasCommonSelectedLiquidId ? firstSelectedLiquidId : null
+    commonSelectedVolume = hasCommonSelectedVolume ? firstSelectedVolume : null
+  }
+  return {commonSelectedLiquidId, commonSelectedVolume}
 }
