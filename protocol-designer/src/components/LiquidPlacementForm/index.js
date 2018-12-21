@@ -41,7 +41,7 @@ function mapStateToProps (state: BaseState, ownProps: OP): SP {
   )
 
   return {
-    commonSelectedLiquidId: wellContentsSelectors.getSelectedWellsCommonIngredId(state),
+    // commonSelectedLiquidId: wellContentsSelectors.getSelectedWellsCommonIngredId(state),
     commonSelectedVolume: wellContentsSelectors.getSelectedWellsCommonVolume(state),
     liquidSelectionOptions: labwareIngredSelectors.getLiquidSelectionOptions(state),
     showForm: selectedWells.length > 0,
@@ -71,6 +71,7 @@ function mergeProps (stateProps: SP, dispatchProps: {dispatch: Dispatch<*>}, own
 
   return {
     ...passThruProps,
+    commonSelectedLiquidId: ownProps.commonSelectedLiquidId,
     cancelForm: ownProps.deselectAll,
     clearWells,
     saveForm: (values: ValidFormValues) => {

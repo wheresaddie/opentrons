@@ -33,11 +33,7 @@ type State = {
 }
 
 class LiquidPlacementModal extends React.Component<SP, State> {
-  state = {highlightedWells: {}}
-  constructor (props) {
-    super(props)
-    this.state = {highlightedWells: {}, selectedWells: {}}
-  }
+  state = {highlightedWells: {}, selectedWells: {}}
 
   updateHighlightedWells = (wells: Wells) => {
     this.setState({highlightedWells: wells})
@@ -54,17 +50,34 @@ class LiquidPlacementModal extends React.Component<SP, State> {
   }
 
   render () {
+    const {wellContents} = this.props
+    const {selectedWells} = this.state
+    let commonSelectedLiquidId = null
+
+    if (!isEmpty(wellContents) && !isEmpty(selectedWells)) {
+      const firstSelectedWell = Object.keys(selectedWells)[0]
+      const liquidIds = wellContents[firstSelectedWell] ? Object.keys(wellContents[firstSelectedWell].ingreds) : []
+      const firstSelectedLiquidId = liquidIds[0] || null
+      const hasCommonSelectedLiquidId = Object.keys(selectedWells).every(well => {
+        const ingreds = wellContents[well].ingreds ? Object.keys(wellContents[well].ingreds) : []
+        return ingreds.length === 1 && ingreds[0] === firstSelectedLiquidId
+      })
+      commonSelectedLiquidId = hasCommonSelectedLiquidId ? firstSelectedLiquidId : null
+    }
+
     return (
-      <div className={cx(styles.liquid_placement_modal, {[styles.expanded]: !isEmpty(this.state.selectedWells)})}>
+      <div className={cx(styles.liquid_placement_modal, {[styles.expanded]: !isEmpty(selectedWells)})}>
         <LiquidPlacementForm
+          commonSelectedLiquidId={commonSelectedLiquidId}
+          // initialVolume={commonSelectedLiquidId}
           deselectAll={this.deselectAll}
-          selectedWells={this.state.selectedWells} />
+          selectedWells={selectedWells} />
 
         <SingleLabwareWrapper showLabels>
           <SelectableLabware
             wellContents={this.props.wellContents}
             containerType={this.props.containerType}
-            selectedWells={this.state.selectedWells}
+            selectedWells={selectedWells}
             highlightedWells={this.state.highlightedWells}
             selectWells={this.selectWells}
             deselectWells={this.deselectWells}
