@@ -36,7 +36,7 @@ export const getLabwareLiquidState: Selector<StepGeneration.LabwareLiquidState> 
       const liquidStateForLabwareAllWells = allWells.reduce(
         (innerAcc: StepGeneration.SingleLabwareLiquidState, well) => ({
           ...innerAcc,
-          [well]: (ingredLocations[labwareId] && ingredLocations[labwareId][well]) || {},
+          [well]: (ingredLocations[labwareId] && ingredLocations[labwareId][well]) || {}, // TODO IMMEDIATELY can this be null, or omit well?
         }),
         {}
       )

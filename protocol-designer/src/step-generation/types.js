@@ -170,7 +170,7 @@ export type LabwareData = {|
   */
 type TipId = string
 
-export type LocationLiquidState = {[ingredGroup: string]: {volume: number}}
+export type LocationLiquidState = {[ingredGroup: string]: {volume: number, serializationNum?: ?number}} // TODO IMMEDIATELY don't maybe the serializationNum key, just its value
 
 export type SingleLabwareLiquidState = {[well: string]: LocationLiquidState}
 

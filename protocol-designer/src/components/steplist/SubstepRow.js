@@ -31,34 +31,42 @@ type SubstepRowProps = {|
 |}
 
 type PillTooltipContentsProps = {
-  ingreds: WellIngredientVolumeData | LocationLiquidState,
+  ingreds: WellIngredientVolumeData | LocationLiquidState, // TODO IMMEDIATELY why?
   ingredNames: WellIngredientNames,
   well: string,
 }
 export const PillTooltipContents = (props: PillTooltipContentsProps) => {
   const totalLiquidVolume = reduce(props.ingreds, (acc, ingred) => acc + ingred.volume, 0)
   const hasMultipleIngreds = Object.keys(props.ingreds).length > 1
+
+  const ingredRows = map(props.ingreds, (ingred, groupId) => {
+    const serializationNum = props.ingreds[groupId].serializationNum
+    const ingredName = props.ingredNames[groupId]
+    const ingredLabel = serializationNum != null
+      ? `${ingredName} ${serializationNum + 1}`
+      : ingredName
+    return (
+      <tr key={groupId} className={styles.ingred_row}>
+        <td>
+          <div
+            className={styles.liquid_circle}
+            style={{backgroundColor: swatchColors(Number(groupId))}} />
+        </td>
+        <td className={styles.ingred_name}>{ingredLabel}</td>
+        {
+          hasMultipleIngreds &&
+          <td className={styles.ingred_percentage}>{formatPercentage(ingred.volume, totalLiquidVolume)}</td>
+        }
+        <td className={styles.ingred_partial_volume}>{formatVolume(ingred.volume, 2)}µl</td>
+      </tr>
+    )
+  })
+
   return (
     <div className={styles.liquid_tooltip_contents}>
       <table>
         <tbody>
-          {map(props.ingreds, (ingred, groupId) => (
-            <tr key={groupId} className={styles.ingred_row}>
-              <td>
-                <div
-                  className={styles.liquid_circle}
-                  style={{backgroundColor: swatchColors(Number(groupId))}} />
-              </td>
-              <td className={styles.ingred_name}>
-                {props.ingredNames[groupId]}
-              </td>
-              {
-                hasMultipleIngreds &&
-                <td className={styles.ingred_percentage}>{formatPercentage(ingred.volume, totalLiquidVolume)}</td>
-              }
-              <td className={styles.ingred_partial_volume}>{formatVolume(ingred.volume, 2)}µl</td>
-            </tr>
-          ))}
+          {ingredRows}
         </tbody>
       </table>
       {

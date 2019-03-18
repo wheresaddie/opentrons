@@ -169,6 +169,18 @@ export const ingredients = handleActions({
 
 type LocationsState = LabwareLiquidState
 
+export function _getWellToSerialNumMapping (args: {
+  labwareContents: SingleLabwareLiquidState,
+  liquidGroupId: string,
+}): {[well: string]: number} {
+  const {labwareContents, liquidGroupId} = args
+  const wellsWithLiquid = Object.keys(labwareContents)
+    .filter(wellName => liquidGroupId in labwareContents[wellName])
+  const sortedWells = wellsWithLiquid // TODO IMMEDIATELY does this exist in utils?
+  return sortedWells.reduce((acc, well, idx) =>
+    ({...acc, [well]: idx}), {})
+}
+
 export const ingredLocations = handleActions({
   SET_WELL_CONTENTS: (state: LocationsState, action: SetWellContentsAction): LocationsState => {
     const {liquidGroupId, labwareId, wells, volume} = action.payload
@@ -209,6 +221,29 @@ export const ingredLocations = handleActions({
     return mapValues(state, labwareContents =>
       mapValues(labwareContents, well =>
         omit(well, liquidGroupId)))
+  },
+  EDIT_LIQUID_GROUP: (state: LocationsState, action: EditLiquidGroupAction): LocationsState => {
+    const {liquidGroupId, serialize} = action.payload
+    return mapValues(state, (labwareContents: SingleLabwareLiquidState) => {
+      // skip call to this fn if not serializing
+      const wellToSerial = serialize
+        ? _getWellToSerialNumMapping({labwareContents, liquidGroupId})
+        : {}
+      return mapValues(labwareContents, (
+        wellContents: $Values<SingleLabwareLiquidState>,
+        wellName: string,
+      ) => {
+        if (liquidGroupId in wellContents) {
+          return ({
+            ...wellContents,
+            [liquidGroupId]: {
+              ...wellContents[liquidGroupId],
+              serializationNum: wellToSerial[wellName] || null},
+          })
+        }
+        return wellContents
+      })
+    })
   },
   DELETE_CONTAINER: (
     state: LocationsState,
