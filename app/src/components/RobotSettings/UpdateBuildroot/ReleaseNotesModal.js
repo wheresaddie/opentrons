@@ -10,10 +10,11 @@ type Props = {
   notNowButton: ButtonProps,
   releaseNotes: ?string,
   buildrootStatus: BuildrootStatus | null,
+  proceed: () => mixed,
 }
 
 export default function ReleaseNotesModal(props: Props) {
-  const { notNowButton, releaseNotes, buildrootStatus } = props
+  const { notNowButton, releaseNotes, buildrootStatus, proceed } = props
   const heading =
     buildrootStatus === 'buildroot' ? 'Robot Update' : 'Robot System Update'
   const buttons = [
@@ -21,7 +22,7 @@ export default function ReleaseNotesModal(props: Props) {
     {
       children: 'update robot',
       className: styles.view_update_button,
-      disabled: true,
+      onClick: proceed,
     },
   ]
   return (

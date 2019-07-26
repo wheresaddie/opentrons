@@ -97,6 +97,7 @@ function ViewUpdateModal(props: Props) {
         notNowButton={notNowButton}
         releaseNotes={buildrootUpdateInfo?.releaseNotes}
         buildrootStatus={buildrootStatus}
+        proceed={() => setCurrentStep('installUpdate')}
       />
     )
   }
