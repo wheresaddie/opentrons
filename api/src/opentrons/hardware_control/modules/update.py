@@ -33,6 +33,8 @@ async def enter_bootloader(driver, model):
     driver.disconnect()
     new_port = ''
     try:
+        if model == 'thermocycler':
+            # look for a volume in /media called tcb
         new_port = await asyncio.wait_for(
             _port_poll(_has_old_bootloader(model), ports_before_dfu_mode),
             PORT_SEARCH_TIMEOUT)

@@ -82,13 +82,21 @@ async def update_firmware(
     simulating = module.is_simulated
     cls = type(module)
     old_port = module.port
-    flash_port = await module.prep_for_update()
     callback = module.interrupt_callback
+    flash_port = await module.prep_for_update()
     del module
-    after_port, results = await update.update_firmware(flash_port,
+
+    if (cls == Thermocycler):
+        # write 'firmware_file' to flash_port
+        # which in this case is actually a drive
+        # will probably have to discover modules again
+        # so you get the new port name, then create an instance
+    else:
+        after_port, results = await update.update_firmware(flash_port,
                                                        firmware_file,
                                                        loop)
-    await asyncio.sleep(1.0)
+        await asyncio.sleep(1.0)
+
     new_port = after_port or old_port
     if not results[0]:
         raise UpdateError(results[1])

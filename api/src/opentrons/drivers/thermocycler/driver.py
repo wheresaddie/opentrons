@@ -48,6 +48,7 @@ def _build_temp_code(temp, hold_time=None):
 
 
 TC_BAUDRATE = 115200
+TC_BOOTLOADER_BAUDRATE = 1200
 # TODO (Laura 20190327) increased the thermocycler command timeout
 # temporarily until we can change the firmware to asynchronously handle
 # the lid being open and closed
@@ -414,6 +415,14 @@ class Thermocycler:
             return utils.parse_device_information(_device_info_res)
         else:
             raise ThermocyclerError("Thermocycler did not return device info")
+
+    async def enter_programming_mode(self):
+        port = self._poller._port
+        self.disconnect()
+        connection = serial_communication.connect(port=port,
+                                     baudrate=TC_BOOTLOADER_BAUDRATE)
+        await asyncio.sleep(0.05)
+        connection.close()
 
     async def _write_and_wait(self, command):
         ret = None

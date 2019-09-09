@@ -370,4 +370,6 @@ class Thermocycler(mod_abc.AbstractModule):
         return self._port
 
     async def prep_for_update(self):
-        pass
+        path_to_drive = await update.enter_bootloader(self._driver,
+                                                      self.name())
+        return path_to_drive
