@@ -11,7 +11,7 @@ import asyncio
 import logging
 import sys
 import threading
-from typing import Any, Callable, Dict, List, Optional, TextIO
+from typing import Any, Callable, Dict, List, Optional, IO
 
 from opentrons import protocol_api, robot, legacy_api, __version__
 from opentrons.protocol_api import execute as execute_apiv2
@@ -102,7 +102,7 @@ def get_arguments() -> argparse.ArgumentParser:
     return parser
 
 
-def execute(protocol_file: TextIO,
+def execute(protocol_file: IO[bytes],
             propagate_logs: bool = False,
             log_level: str = 'warning',
             emit_runlog: Callable[[Dict[str, Any]], None] = None):
@@ -165,8 +165,7 @@ def execute(protocol_file: TextIO,
     stack_logger = logging.getLogger('opentrons')
     stack_logger.propagate = propagate_logs
     stack_logger.setLevel(getattr(logging, log_level.upper(), logging.WARNING))
-    contents = protocol_file.read()
-    protocol = parse(contents, protocol_file.name)
+    protocol = parse(protocol_file, protocol_file.name)
     if ff.use_protocol_api_v2():
         context = get_protocol_api()
         if emit_runlog:
@@ -193,7 +192,7 @@ def execute(protocol_file: TextIO,
 def _print_runlog(command: Dict[str, Any]):
     when = 'Begin:' if command['payload']['$'] == 'before' else 'End:'
     print(' '.join([
-        '\t'*command['level'],
+        '\t' * command['level'],
         when,
         command['payload']['text'].format(**command['payload']['text'])]))
 
