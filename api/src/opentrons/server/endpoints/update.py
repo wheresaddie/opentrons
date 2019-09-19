@@ -3,6 +3,7 @@ import asyncio
 import tempfile
 from aiohttp import web
 from opentrons import modules
+from opentrons.config import feature_flags as ff
 
 log = logging.getLogger(__name__)
 UPDATE_TIMEOUT = 15
@@ -61,9 +62,10 @@ async def _upload_to_module(hw, serialnum, fw_filename, loop):
     moving the drivers themselves to the serverlib)
     """
 
-    # ensure there is a reference to the port
-    if not hw.is_connected():
-        hw.connect()
+    if not ff.use_protocol_api_v2():
+        # ensure there is a reference to the port
+        if not hw.is_connected():
+            hw.connect()
 
     hw.discover_modules()
     hw_mods = hw.attached_modules.values()
