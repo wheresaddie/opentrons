@@ -86,11 +86,12 @@ async def update_firmware(
     flash_port = await module.prep_for_update()
     del module
 
-    if (cls == Thermocycler):
+    if (cls == thermocycler.Thermocycler):
         # write 'firmware_file' to flash_port
         # which in this case is actually a drive
         # will probably have to discover modules again
         # so you get the new port name, then create an instance
+        log.debug('here we write the firmware file')
     else:
         after_port, results = await update.update_firmware(flash_port,
                                                        firmware_file,
