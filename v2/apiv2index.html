@@ -1,0 +1,1387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Opentrons API Version 2 &#8212; Opentrons API Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/new-nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_master.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Opentrons API Documentation" href="../index.html" />
+    <link rel="next" title="Pipettes" href="new_pipette.html" />
+    <link rel="prev" title="API Reference" href="../v1/api.html" />
+ 
+<link rel="stylesheet" href="../_static/custom.css" type="text/css" />  
+<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<script src="../_static/Akko-Pro-All.js"></script>
+<!-- INTERCOM -->
+<script>
+window.intercomSettings = {
+  app_id: 'ukpodv2l'
+};
+</script>
+<script>
+(function () {
+  var w = window;
+  var ic = w.Intercom;
+  if (typeof ic === "function") {
+    ic('reattach_activator');
+    ic('update', intercomSettings);
+  } else {
+    var d = document;
+    var i = function() {
+      i.c(arguments)
+    };
+    i.q = [];
+    i.c = function(args) {
+      i.q.push(args)
+    };
+    w.Intercom = i;
+
+    function l () {
+      var s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://widget.intercom.io/widget/ukpodv2l';
+      var x = d.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (w.attachEvent) {
+        w.attachEvent('onload', l);
+    } else {
+        w.addEventListener('load', l, false);
+    }
+  }
+})()
+</script>
+
+  </head>
+  <body role="document">
+
+<header id="nav">
+  <nav class="docs-navbar">
+    <div class="container">
+      <div class="container-div"></div>
+    <ul>
+      <li>
+        <a
+          href="https://docs.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="opentrons-api"
+          data-gtm-action="click"
+          >Python API</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://labware.opentrons.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="labware-library"
+          data-gtm-action="click"
+          >Labware Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://protocols.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-library"
+          data-gtm-action="click"
+          >Protocol Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://designer.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-designer"
+          data-gtm-action="click"
+          >Protocol Designer</a
+        >
+      </li>
+    </ul>
+    </div>
+  </nav>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-container">
+        <div class="navbar-logo" onclick="close()">
+          <a
+            href="https://opentrons.com"
+            class="brand"
+            title="Home"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm-category="d-header"
+            data-gtm-label="logo"
+            data-gtm-action="click"
+          >
+            <img
+              class="img-logo"
+              src="https://s3.amazonaws.com/opentrons-images/website/ot_logo_full.png"
+              alt="Opentrons Home"
+            >
+          </a>
+        </div>
+        <div class="schedule-menu mobile-schedule-menu">
+          <div class="schedule-div">
+            <a
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales"
+              data-gtm-action="click"
+            >Contact sales</a>
+          </div>
+          <div class="mobile-hamburger">
+            <div id="nav-collapse" onclick="toggleOpen()">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-menu">
+        <ul class="main-menu">
+          <li class="main-menu-li about" onclick="toggleMenu(`about`)">
+            <span class="menu-span" id="menu-about">About</span>
+            <ul id="about" class="navbar-ul visible">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/about"
+                  data-gtm-category="d-header"
+                  data-gtm-label="about"
+                  data-gtm-action="click"
+                >Mission</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/team"
+                  data-gtm-category="d-header"
+                  data-gtm-label="team"
+                  data-gtm-action="click"
+                >Our Team</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://blog.opentrons.com/"
+                  data-gtm-category="d-header"
+                  data-gtm-label="blog"
+                  data-gtm-action="click"
+                >Blog</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`products`)">
+            <span class="menu-span" id="menu-products">Products</span>
+            <ul class="navbar-ul visible" id="products">
+              <li onclick="closeMenu()">
+                <a
+                  href="https://opentrons.com/ot-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2"
+                  data-gtm-action="click"
+                >OT-2 Robot</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/modules"
+                  data-gtm-category="d-header"
+                  data-gtm-label="modules"
+                  data-gtm-action="click"
+                >OT-2 Add-ons</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pipettes"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2-pipettes"
+                  data-gtm-action="click"
+                >OT-2 Pipettes</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/opentrons-tips"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tips"
+                  data-gtm-action="click"
+                >Pipette Tips</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/racks-and-adapters"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tube-racks"
+                  data-gtm-action="click"
+                >Racks &amp; Adapters</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/mag-bead-kits"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="reagents"
+                  data-gtm-action="click"
+                >Reagents</a>
+              </li>
+              <a
+                onclick="closeMenu()"
+                class="blue blue-products"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`applications`)">
+            <span class="menu-span" id="menu-applications">Applications</span>
+            <ul class="navbar-ul visible" id="applications">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pcr-sample-prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="prep"
+                  data-gtm-action="click"
+                >PCR Sample Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                  data-gtm-category="d-header"
+                  data-gtm-label="nap"
+                  data-gtm-action="click"
+                >Nucelic Acid Purification</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                  data-gtm-category="d-header"
+                  data-gtm-label="qpcr"
+                  data-gtm-action="click"
+                >qPCR/RT-PCR</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                  data-gtm-category="d-header"
+                  data-gtm-label="elisa"
+                  data-gtm-action="click"
+                >ELISA</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ngs-prep"
+                  data-gtm-action="click"
+                >NGS Library Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                  data-gtm-category="d-header"
+                  data-gtm-label="basic"
+                  data-gtm-action="click"
+                >Basic Pipetting</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`protocols`)">
+            <span class="menu-span" id="menu-protocols">Protocols</span>
+            <ul class="navbar-ul protocol-nav visible" id="protocols">
+              <div class="navbar-ul-div">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-tools"
+                      data-gtm-action="click"
+                    >Protocol Options</a>
+                    <span>Gain an overview of our protocol creation options</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols/designer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-designer"
+                      data-gtm-action="click"
+                    >Protocol Designer</a>
+                    <span>
+                      Use our graphical user interface to design
+                      protocols
+                    </span>
+                  </li>
+                  <li class="protocol-bottom" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://protocols.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-library"
+                      data-gtm-action="click"
+                    >Protocol Library</a>
+                    <span>Explore our open source database of protocols</span>
+                  </li>
+                </div>
+                <div class="protocol-items">
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://docs.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="opentrons-api"
+                      data-gtm-action="click"
+                    >Python API</a>
+                    <span class="protocol-items-span">
+                      Maximum customization for anyone with python and basic
+                      wetlab skills
+                    </span>
+                  </li>
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-protocols"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span class="protocol-items-span">Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div onclick="closeMenu()">
+                <a
+                  class="blue"
+                  href="https://opentrons.com/request-protocol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="request-protocol-protocols"
+                  data-gtm-action="click"
+                >Request a free custom protocol ›</a>
+              </div>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu('sns')">
+            <span class="menu-span" id="menu-sns">Support &amp; Sales</span>
+            <ul class="navbar-ul protocol-nav sns visible" id="sns">
+              <!-- <span>SUPPORT</span> -->
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales">SUPPORT</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                    >OT-2 Start Guide</a>
+                    <span>You recieved your robot, here's what's next</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help</a>
+                    <span>Answer common technical questions</span>
+                  </li>
+                  <li onclick="closeMenu()" class="github">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales"></span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact-support"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-support"
+                    data-gtm-action="click"
+                  >Contact support ›</a>
+                </div>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+              <div class="navbar-ul-li order-online">
+                <div class="protocol-items">
+                  <li onclick="close()">
+                    <span class="support-sales">SALES</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                    >Order online</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-sales"
+                    data-gtm-action="click"
+                  >Contact sales ›</a>
+                </div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="cta-demo-button"
+                  data-gtm-action="click"
+                  class="btn schedule-demo"
+                  href="https://opentrons.com/demo"
+                >Schedule a demo ›</a>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+            </ul>
+          </li>
+        </ul>
+        <div class="schedule-menu desktop-schedule-menu">
+          <div class="schedule-div">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+      </div>
+      <div class="div-sub-menu">
+        <div class="mobile-menu mobilemenufixed dnone">
+          <ul>
+            <li onclick="showMenu('about')">About</li>
+            <li onclick="showMenu('products')">Products</li>
+            <li onclick="showMenu('applications')">Applications</li>
+            <li onclick="showMenu('protocols')">Protocols</li>
+            <li onclick="showMenu('sns')">Support &amp; Sales</li>
+          </ul>
+          <div class="menu-button" onclick="close()">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+        <div class="sub-menu about sub-menu-about">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>About</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/about"
+                data-gtm-category="d-header"
+                data-gtm-label="about"
+                data-gtm-action="click"
+              >Mission ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/team"
+                data-gtm-category="d-header"
+                data-gtm-label="team"
+                data-gtm-action="click"
+              >Our Team ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://blog.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="blog"
+                data-gtm-action="click"
+              >Blog ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu products sub-menu-products">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Products</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/ot-2"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2"
+                data-gtm-action="click"
+              >OT-2 Robot ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/modules"
+                data-gtm-category="d-header"
+                data-gtm-label="modules"
+                data-gtm-action="click"
+              >OT-2 Add-ons ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pipettes"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2-pipettes"
+                data-gtm-action="click"
+              >OT-2 Pipettes ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/opentrons-tips"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tips"
+                data-gtm-action="click"
+              >Pipette Tips ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/racks-and-adapters"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tube-racks"
+                data-gtm-action="click"
+              >Racks &amp; Adapters ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/mag-bead-kits"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="reagents"
+                data-gtm-action="click"
+              >Reagents ›</a>
+            </li>
+            <li class="blue" onclick="close()">
+              <a
+                onclick="close()"
+                class="blue"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="sub-menu applications sub-menu-applications"
+        >
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Applications</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pcr-sample-prep"
+                data-gtm-category="d-header"
+                data-gtm-label="prep"
+                data-gtm-action="click"
+              >PCR Sample Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                data-gtm-category="d-header"
+                data-gtm-label="nap"
+                data-gtm-action="click"
+              >Nucelic Acid Purification ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                data-gtm-category="d-header"
+                data-gtm-label="qpcr"
+                data-gtm-action="click"
+              >qPCR/RT-PCR ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                data-gtm-category="d-header"
+                data-gtm-label="elisa"
+                data-gtm-action="click"
+              >ELISA ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                data-gtm-category="d-header"
+                data-gtm-label="ngs-prep"
+                data-gtm-action="click"
+              >NGS Library Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                data-gtm-category="d-header"
+                data-gtm-label="basic"
+                data-gtm-action="click"
+              >Basic Pipetting ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu protocols sub-menu-protocols">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Protocols</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-tools"
+                data-gtm-action="click"
+              >Protocol Options ›</a>
+              <span>Gain an overview of our protocol creation options</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols/designer"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-designer"
+                data-gtm-action="click"
+              >Protocol Designer ›</a>
+              <span>Use our graphical user interface to design protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-library"
+                data-gtm-action="click"
+              >Protocol Library ›</a>
+              <span>Explore our open source database of protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="opentrons-api"
+                data-gtm-action="click"
+              >Python API ›</a>
+              <span>
+                Maximum customization for anyone with python and basic weblab
+                skills
+              </span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/Opentrons"
+                data-gtm-category="d-header"
+                data-gtm-label="github-protocols"
+                data-gtm-action="click"
+              >Github ›</a>
+              <span>Contribute to open source protocol repository</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="blue"
+                href="https://opentrons.com/request-protocol"
+                data-gtm-category="d-header"
+                data-gtm-label="request-protocol-protocols"
+                data-gtm-action="click"
+              >Request a free custom protocol ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu sns sub-menu-sns">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Support &amp; Sales</span>
+          </div>
+          <ul class="sns-ul">
+            <section class="sns-sales">
+              <!-- <span class="sales">SALES</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron">SALES</span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                      class="order-line-mobile"
+                    >Order online ›</a>
+                  </div>
+                </section>
+              </li>
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron mobile-contact"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="sales-link mobile-contact-sales"
+                      href="https://opentrons.com/contact"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-sales"
+                      data-gtm-action="click"
+                    >Contact sales ›</a>
+                  </div>
+                </section>
+              </li>
+              <li>
+                <section class="sns-support-section">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <!-- <a
+                      class="sales-link schedule-demo-mobile"
+                      data-gtm-category="d-header"
+                      data-gtm-label="schedule-demo"
+                      data-gtm-action="click"
+                      onclick="openModal('demo')"
+                    >Schedule a demo ›</a> -->
+                  </div>
+                </section>
+              </li>
+            </section>
+            <section class="sns-support">
+              <!-- <span class="support">SUPPORT</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron">SUPPORT</span>
+                  <div class="ot-2-start-guide support-items">
+                    <a
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                      class="ot-2-guide"
+                    >OT-2 Start Guide ›</a>
+                    <span class="ot-2-guide">You received your robot, here's what's next</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help ›</a>
+                    <span>Answer common technical questions</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github ›</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library ›</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app ›</a>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="blue-text sales-link"
+                      href="https://opentrons.com/contact-support"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-support"
+                      data-gtm-action="click"
+                    >Contact support ›</a>
+                  </div>
+                </section>
+              </li>
+            </section>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>   
+
+    <div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                
+  <div class="section" id="opentrons-api-version-2">
+<span id="apiv2index"></span><h1>Opentrons API Version 2<a class="headerlink" href="#opentrons-api-version-2" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="overview">
+<span id="protocol-api-robot"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-it-looks">
+<h3>How it Looks<a class="headerlink" href="#how-it-looks" title="Permalink to this headline">¶</a></h3>
+<p>The design goal of the Opentrons API is to make code readable and easy to understand. For example, below is a short set of instructions to transfer from well <code class="docutils literal"><span class="pre">'A1'</span></code> to well <code class="docutils literal"><span class="pre">'B1'</span></code> that even a computer could understand:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>This protocol is by me; it’s called Opentrons Protocol Tutorial and is used for demonstrating the Opentrons API
+
+Begin the protocol
+
+Add a 96 well plate, and place it in slot &#39;2&#39; of the robot deck
+Add a 300 µL tip rack, and place it in slot &#39;1&#39; of the robot deck
+
+Add a single-channel 300 µL pipette to the left mount, and tell it to use that tip rack
+
+Transfer 100 µL from the plate&#39;s &#39;A1&#39; well to its &#39;B2&#39; well
+</pre></div>
+</div>
+<p>If we were to rewrite this with the Opentrons API, it would look like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="c1"># metadata</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;protocolName&#39;</span><span class="p">:</span> <span class="s1">&#39;My Protocol&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;Name &lt;email@address.com&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Simple protocol to get started using OT2&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># protocol run function. the part after the colon lets your editor know</span>
+<span class="c1"># where to look for autocomplete suggestions</span>
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+
+    <span class="c1"># labware</span>
+    <span class="n">plate</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;corning_96_wellplate_360ul_flat&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="n">tiprack</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;opentrons_96_tiprack_300ul&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+    <span class="c1"># pipettes</span>
+    <span class="n">left_pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span>
+         <span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tip_racks</span><span class="o">=</span><span class="p">[</span><span class="n">tiprack</span><span class="p">])</span>
+
+    <span class="c1"># commands</span>
+    <span class="n">left_pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+    <span class="n">left_pipette</span><span class="o">.</span><span class="n">aspirate</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+    <span class="n">left_pipette</span><span class="o">.</span><span class="n">dispense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">])</span>
+    <span class="n">left_pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="how-it-s-organized">
+<h3>How it&#8217;s Organized<a class="headerlink" href="#how-it-s-organized" title="Permalink to this headline">¶</a></h3>
+<p>When writing protocols using the Opentrons API, there are generally five sections:</p>
+<ol class="arabic simple">
+<li>Metadata</li>
+<li>Run function</li>
+<li>Labware</li>
+<li>Pipettes</li>
+<li>Commands</li>
+</ol>
+<div class="section" id="metadata">
+<h4>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h4>
+<p>Metadata is a dictionary of data that is read by the server and returned to client applications (such as the Opentrons Run App). It is not needed to run a protocol (and is entirely optional), but if present can help the client application display additional data about the protocol currently being executed.</p>
+<p>The fields above (<code class="docutils literal"><span class="pre">&quot;protocolName&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;author&quot;</span></code>, and <code class="docutils literal"><span class="pre">&quot;description&quot;</span></code>) are the recommended fields, but the metadata dictionary can contain fewer fields, or additional fields as desired (though non-standard fields are not displayed by the Opentrons app).</p>
+</div>
+<div class="section" id="the-run-function-and-the-protocol-context">
+<h4>The Run Function and the Protocol Context<a class="headerlink" href="#the-run-function-and-the-protocol-context" title="Permalink to this headline">¶</a></h4>
+<p>Opentrons API version 2 protocols are structured around a function called <code class="docutils literal"><span class="pre">run(protocol)</span></code>, defined in code like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>This function must be named exactly <code class="docutils literal"><span class="pre">run</span></code> and must take exactly one mandatory argument (its name doesn’t matter, but we recommend <code class="docutils literal"><span class="pre">protocol</span></code> since this argument represents the protocol that the robot will execute).</p>
+<p>The function <code class="docutils literal"><span class="pre">run</span></code> is the container for the code that defines your protocol.</p>
+<p>The object <code class="docutils literal"><span class="pre">protocol</span></code> is the <em>protocol context</em>, which represents the robot and its capabilities. It is always an instance of the <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext" title="opentrons.protocol_api.contexts.ProtocolContext"><code class="xref py py-class docutils literal"><span class="pre">opentrons.protocol_api.contexts.ProtocolContext</span></code></a> class (though you&#8217;ll never have to instantiate one yourself - it is always passed in to <code class="docutils literal"><span class="pre">run()</span></code>), and it is tagged as such in the example protocol to allow most editors to give you autocomplete.</p>
+<p>The protocol context has two responsibilities:</p>
+<ol class="arabic simple">
+<li>Remember, track, and check the robot’s state</li>
+<li>Expose the functions that make the robot execute actions</li>
+</ol>
+<p>The protocol context plays the same role as the <code class="docutils literal"><span class="pre">robot</span></code>, <code class="docutils literal"><span class="pre">labware</span></code>, <code class="docutils literal"><span class="pre">instruments</span></code>, and <code class="docutils literal"><span class="pre">modules</span></code> objects in past versions of the API, with one important difference: it is only one object; and because it is passed in to your protocol rather than imported, it is possible for the API to be much more rigorous about separating simulation from reality.</p>
+<p>The key point is that there is no longer any need to <code class="docutils literal"><span class="pre">import</span> <span class="pre">opentrons</span></code> at the top of every protocol, since the <em>robot</em> now <em>runs the protocol</em>, rather than the <em>protocol running the robot</em>. The example protocol imports the definition of the protocol context to provide editors with autocomplete sources.</p>
+</div>
+<div class="section" id="labware">
+<h4>Labware<a class="headerlink" href="#labware" title="Permalink to this headline">¶</a></h4>
+<p>The next step is defining the labware required for your protocol. You must tell the protocol context about what should be present on the deck, and where. You tell the protocol context about labware by calling the method <code class="docutils literal"><span class="pre">protocol.load_labware(name,</span> <span class="pre">slot)</span></code> and saving the result.</p>
+<p>The name of a labware is a string that is different for each kind of labware. You can look up labware to add to your protocol on the Opentrons <a class="reference external" href="https://labware.opentrons.com">Labware Library</a>.</p>
+<p>The slot is the labelled location on the deck in which you&#8217;ve placed the labware. The available slots are numbered from 1-11.</p>
+<p>Our example protocol above loads a <a class="reference external" href="https://labware.opentrons.com/corning_96_wellplate_360ul_flat">Corning 96 Well Plate</a> in slot 2 (<code class="docutils literal"><span class="pre">plate</span> <span class="pre">=</span> <span class="pre">protocol.load_labware('corning_96_wellplate_360ul_flat',</span> <span class="pre">2)</span></code>) and an <a class="reference external" href="https://labware.opentrons.com/opentrons_96_tiprack_300ul">Opentrons 300ul Tiprack</a> in slot 1 (<code class="docutils literal"><span class="pre">tiprack</span> <span class="pre">=</span> <span class="pre">protocol.load_labware('opentrons_96_tiprack_300ul',</span> <span class="pre">1)</span></code>). These can be referenced later in the protocol as <code class="docutils literal"><span class="pre">plate</span></code> and <code class="docutils literal"><span class="pre">tiprack</span></code> respectively. Check out <a class="reference external" href="https://docs.python.org/3/index.html">the python docs</a> for further clarification on using variables effectively in your code.</p>
+<p>You can find more information about handling labware in the <a class="reference internal" href="new_labware.html#new-labware"><span class="std std-ref">Labware</span></a> section.</p>
+</div>
+<div class="section" id="pipettes">
+<h4>Pipettes<a class="headerlink" href="#pipettes" title="Permalink to this headline">¶</a></h4>
+<p>After defining labware, you define the instruments required for your protocol. You tell the protocol context about which pipettes should be attached, and which slot they should be attached to, by calling the method <code class="docutils literal"><span class="pre">protocol.load_instrument(model,</span> <span class="pre">mount,</span> <span class="pre">tip_racks)</span></code> and saving the result.</p>
+<p>The <code class="docutils literal"><span class="pre">model</span></code> of the pipette is the kind of pipette that should be attached; the <code class="docutils literal"><span class="pre">mount</span></code> is either <code class="docutils literal"><span class="pre">&quot;left&quot;</span></code> or <code class="docutils literal"><span class="pre">&quot;right&quot;</span></code>; and <code class="docutils literal"><span class="pre">tip_racks</span></code> is a list of the objects representing tip racks that this instrument should use. Specifying <code class="docutils literal"><span class="pre">tip_racks</span></code> is optional, but if you don&#8217;t then you&#8217;ll have to manually specify where the instrument should pick up tips from every time you try and pick up a tip.</p>
+<p>See <a class="reference internal" href="new_pipette.html#new-pipette"><span class="std std-ref">Pipettes</span></a> for more information on creating and working with pipettes.</p>
+<p>Our example protocol above loads a P300 Single-channel pipette (<code class="docutils literal"><span class="pre">'p300_single'</span></code>) in the left mount (<code class="docutils literal"><span class="pre">'left'</span></code>), and uses the Opentrons 300ul tiprack we loaded previously as a source of tips (<code class="docutils literal"><span class="pre">tip_racks=[tiprack]</span></code>).</p>
+</div>
+<div class="section" id="commands">
+<h4>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h4>
+<p>Once the instruments and labware required for the protocol are defined, the next step is to define the commands that make up the protocol. The most common commands are <code class="docutils literal"><span class="pre">aspirate()</span></code>, <code class="docutils literal"><span class="pre">dispense()</span></code>, <code class="docutils literal"><span class="pre">pick_up_tip()</span></code>, and <code class="docutils literal"><span class="pre">drop_tip()</span></code>. These and many others are described in the <a class="reference internal" href="new_atomic_commands.html#v2-atomic-commands"><span class="std std-ref">Building Block Commands</span></a> and <a class="reference internal" href="new_complex_commands.html#v2-complex-commands"><span class="std std-ref">Complex Commands</span></a> sections, which go into more detail about the commands and how they work. These commands typically specify which wells of which labware to interact with, using the labware you defined earlier, and are methods of the instruments you created in the pipette section. For instance, in our example protocol, you use the pipette you defined to:</p>
+<ol class="arabic simple">
+<li>Pick up a tip (implicitly from the tiprack you specified in slot 1 and assigned to the pipette): <code class="docutils literal"><span class="pre">pipette.pick_up_tip()</span></code></li>
+<li>Aspirate 100ul from well A1 of the 96 well plate you specified in slot 2: <code class="docutils literal"><span class="pre">pipette.aspirate(100,</span> <span class="pre">plate['A1'])</span></code></li>
+<li>Dispense 100ul into well A2 of the 96 well plate you specified in slot 2: <code class="docutils literal"><span class="pre">pipette.dispense(100,</span> <span class="pre">plate['A2'])</span></code></li>
+<li>Drop the tip (implicitly into the trash at the back right of the robot&#8217;s deck): <code class="docutils literal"><span class="pre">pipette.drop_tip()</span></code></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Opentrons API</a></h1>
+
+
+
+<p class="blurb">Simple Biology Lab Protocol Coding</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=opentrons&repo=opentrons&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<!-- Navbar override to always show hidden toctree elements in sidebar
+     Think of this like a file (or subdirectory) specific override to
+     the :showhidden: toctree directive or sidebar_show_hidden config
+     variable. Can be removed when APIV2 is public and includehidden
+     set back to theme_sidebar_showhidden
+-->
+<h3>Table Of Contents</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writing.html">Design with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v1/apiv1index.html">Opentrons API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Opentrons API Version 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="new_pipette.html">Pipettes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_labware.html">Labware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_modules.html">Hardware Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_atomic_commands.html">Building Block Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_complex_commands.html">Complex Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_protocol_api.html">API Version 2 Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_advanced_running.html">Running Protocols Directly On The Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-looks">How it Looks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-s-organized">How it&#8217;s Organized</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metadata">Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-run-function-and-the-protocol-context">The Run Function and the Protocol Context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labware">Labware</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pipettes">Pipettes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/OpentronsAPI.pdf">Download As PDF</a></li>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/ot1/index.html">OT 1 API</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../v1/api.html" title="previous chapter">API Reference</a></li>
+      <li>Next: <a href="new_pipette.html" title="next chapter">Pipettes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer>
+  <div class="wrapper">
+
+    <section class="social-signup">
+      <div class="social-links">
+        <a href="https://www.facebook.com/OpenTrons-Labworks/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Facebook"
+        ><img src="https://s3.amazonaws.com/opentrons-images/website/logo_facebook.png" alt="facebook logo"/></a>
+        <a href="https://twitter.com/OpenTrons_" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Twitter"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_twitter.png" alt="twitter logo" /></a>
+        <a href="https://www.instagram.com/opentronslab/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Instagram"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_instagram.png" alt="instagram logo" /></a>
+        <a href="https://www.youtube.com/channel/UCvMRmXIxnHs3AutkVhuqaQg" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Youtube"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_youtube.png" alt="youtube logo" /></a>
+      </div>
+      <h3>Sign Up For Our Newsletter</h3>
+      <div id="mc_embed_signup">
+        <form action="//opentrons.us8.list-manage.com/subscribe/post?u=000595683fb96c5fb3c54cf53&amp;id=ba66060a9c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <input type="email" value="" name="EMAIL" class="email-newsletter" id="mce-EMAIL" placeholder="email address" required
+            ga-on="input"
+            ga-event-category="Mailchimp"
+            ga-event-action="Enter Email"
+            >
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_000595683fb96c5fb3c54cf53_ba66060a9c" tabindex="-1" value=""></div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="gray subscribe"
+            ga-on="click"
+            ga-event-category="Mailchimp"
+            ga-event-action="Newsletter Signup">
+          </div>
+        </form>
+      </div>
+      <p class="copyrite">&#169;&nbsp;OPENTRONS <script type="text/javascript">document.write(new Date().getFullYear())</script></p>
+    </section>
+    <section class="footer-menu">
+      <ul>
+        <li>Products</li>
+        <li><a href="https://opentrons.com/robots" >OT-One</a></li>
+        <li><a href="https://opentrons.com/ot-2" >OT-2</a></li>
+        <li><a href="https://opentrons.com/pipettes" >OT-2 Pipettes</a></li>
+        <li><a href="https://opentrons.com/modules" >Modules</a></li>
+        <li><a href="https://opentrons.com/ot-app" >OT App</a></li>
+        <li><a href="https://protocols.opentrons.com/" target="_blank">Protocol Library</a></li>
+      </ul>
+      <ul>
+        <li>Company</li>
+        <li><a href="https://opentrons.com/about" >About</a></li>
+        <li><a href="https://opentrons.com/team" >Team</a></li>
+        <li><a href="https://blog.opentrons.com/">Blog</a></li>
+        <li><a href="https://opentrons.com/contact" >Contact Us</a></li>
+        <li><a href="https://opentrons.com/jobs" target="_blank" class="hiring">WE'RE HIRING</a></li>
+      </ul>
+      <ul>
+        <li>Resources</li>
+        <li><a href="https://support.opentrons.com" target="_blank">Support</a></li>
+          <li><a href="http://docs.opentrons.com/" target="_blank">Opentrons API</a></li>
+          <li><a href="https://github.com/Opentrons/opentrons/blob/edge/CONTRIBUTING.md" target="_blank">Open Source</a></li>
+      </ul>
+      <ul>
+        <li><a href="https://shop.opentrons.com/" class="buy">Buy</a></li>
+      </ul>
+
+    </section>
+
+  </div>
+</footer>
+<script>
+
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCDX9CX');
+
+</script>
+<script>
+  function toggleMenu(menu) {
+    var element = document.querySelector(`#${menu}`)
+    var elementList = document.querySelectorAll('.navbar-ul')
+    elementList.forEach(e => {
+      if (e !== element) {
+        e.previousElementSibling.classList.add('notActive')
+        e.classList.add('visible')
+      }
+    })
+    if (!element.classList.contains('visible')) {
+      element.classList.add('visible')
+      elementList.forEach(e => {
+        e.previousElementSibling.classList.remove('notActive')
+      })
+    } else {
+      element.classList.remove('visible')
+      element.previousElementSibling.classList.remove('notActive')
+    }
+  }
+  function close() {
+    var elementList = document.querySelectorAll('.navbar-ul')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    elementList.forEach(e => {
+      e.classList.add('visible')
+      e.previousElementSibling.classList.remove('notActive')
+    })
+    subMenu.forEach(e => {
+      e.classList.remove('showmenu')
+      console.dir(e)
+    })
+  }
+  function toggleOpen() {
+    var mobile = document.querySelector('.mobile-hamburger')
+    var mobileMenu = document.querySelector('.mobile-menu')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    if (mobileMenu.classList.contains('dnone')) {
+      mobileMenu.classList.remove('dnone')
+    } else {
+      mobileMenu.classList.add('dnone')
+    }
+    subMenu.forEach(e => {
+      if(e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+    mobile.classList.toggle('open')
+    document.body.classList.toggle('mobile-scrolling')
+  }
+  function showMenu(menu) {
+    var element = document.querySelector(`.sub-menu-${menu}`)
+    if (element.classList.contains('showmenu')) {
+      element.classList.remove('showmenu')
+    } else {
+      element.classList.add('showmenu')
+    }
+  }
+  function closeMenu() {
+    var element = document.querySelectorAll('.sub-menu')
+    element.forEach(e => {
+      if (e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+  }
+  var navbar = document.querySelector('.navbar-menu')
+  document.addEventListener('click', function(event) {
+    var isClickInside = navbar.contains(event.target)
+    if (!isClickInside && window.innerWidth >= 1024) {
+      close()
+    }
+  })
+
+  </script>
+
+
+ 
+  </body>
+</html>

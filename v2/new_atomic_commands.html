@@ -1,0 +1,1575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building Block Commands &#8212; Opentrons API Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/new-nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_master.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Opentrons API Documentation" href="../index.html" />
+    <link rel="up" title="Opentrons API Version 2" href="apiv2index.html" />
+    <link rel="next" title="Complex Commands" href="new_complex_commands.html" />
+    <link rel="prev" title="Hardware Modules" href="new_modules.html" />
+ 
+<link rel="stylesheet" href="../_static/custom.css" type="text/css" />  
+<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<script src="../_static/Akko-Pro-All.js"></script>
+<!-- INTERCOM -->
+<script>
+window.intercomSettings = {
+  app_id: 'ukpodv2l'
+};
+</script>
+<script>
+(function () {
+  var w = window;
+  var ic = w.Intercom;
+  if (typeof ic === "function") {
+    ic('reattach_activator');
+    ic('update', intercomSettings);
+  } else {
+    var d = document;
+    var i = function() {
+      i.c(arguments)
+    };
+    i.q = [];
+    i.c = function(args) {
+      i.q.push(args)
+    };
+    w.Intercom = i;
+
+    function l () {
+      var s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://widget.intercom.io/widget/ukpodv2l';
+      var x = d.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (w.attachEvent) {
+        w.attachEvent('onload', l);
+    } else {
+        w.addEventListener('load', l, false);
+    }
+  }
+})()
+</script>
+
+  </head>
+  <body role="document">
+
+<header id="nav">
+  <nav class="docs-navbar">
+    <div class="container">
+      <div class="container-div"></div>
+    <ul>
+      <li>
+        <a
+          href="https://docs.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="opentrons-api"
+          data-gtm-action="click"
+          >Python API</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://labware.opentrons.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="labware-library"
+          data-gtm-action="click"
+          >Labware Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://protocols.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-library"
+          data-gtm-action="click"
+          >Protocol Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://designer.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-designer"
+          data-gtm-action="click"
+          >Protocol Designer</a
+        >
+      </li>
+    </ul>
+    </div>
+  </nav>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-container">
+        <div class="navbar-logo" onclick="close()">
+          <a
+            href="https://opentrons.com"
+            class="brand"
+            title="Home"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm-category="d-header"
+            data-gtm-label="logo"
+            data-gtm-action="click"
+          >
+            <img
+              class="img-logo"
+              src="https://s3.amazonaws.com/opentrons-images/website/ot_logo_full.png"
+              alt="Opentrons Home"
+            >
+          </a>
+        </div>
+        <div class="schedule-menu mobile-schedule-menu">
+          <div class="schedule-div">
+            <a
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales"
+              data-gtm-action="click"
+            >Contact sales</a>
+          </div>
+          <div class="mobile-hamburger">
+            <div id="nav-collapse" onclick="toggleOpen()">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-menu">
+        <ul class="main-menu">
+          <li class="main-menu-li about" onclick="toggleMenu(`about`)">
+            <span class="menu-span" id="menu-about">About</span>
+            <ul id="about" class="navbar-ul visible">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/about"
+                  data-gtm-category="d-header"
+                  data-gtm-label="about"
+                  data-gtm-action="click"
+                >Mission</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/team"
+                  data-gtm-category="d-header"
+                  data-gtm-label="team"
+                  data-gtm-action="click"
+                >Our Team</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://blog.opentrons.com/"
+                  data-gtm-category="d-header"
+                  data-gtm-label="blog"
+                  data-gtm-action="click"
+                >Blog</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`products`)">
+            <span class="menu-span" id="menu-products">Products</span>
+            <ul class="navbar-ul visible" id="products">
+              <li onclick="closeMenu()">
+                <a
+                  href="https://opentrons.com/ot-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2"
+                  data-gtm-action="click"
+                >OT-2 Robot</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/modules"
+                  data-gtm-category="d-header"
+                  data-gtm-label="modules"
+                  data-gtm-action="click"
+                >OT-2 Add-ons</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pipettes"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2-pipettes"
+                  data-gtm-action="click"
+                >OT-2 Pipettes</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/opentrons-tips"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tips"
+                  data-gtm-action="click"
+                >Pipette Tips</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/racks-and-adapters"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tube-racks"
+                  data-gtm-action="click"
+                >Racks &amp; Adapters</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/mag-bead-kits"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="reagents"
+                  data-gtm-action="click"
+                >Reagents</a>
+              </li>
+              <a
+                onclick="closeMenu()"
+                class="blue blue-products"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`applications`)">
+            <span class="menu-span" id="menu-applications">Applications</span>
+            <ul class="navbar-ul visible" id="applications">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pcr-sample-prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="prep"
+                  data-gtm-action="click"
+                >PCR Sample Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                  data-gtm-category="d-header"
+                  data-gtm-label="nap"
+                  data-gtm-action="click"
+                >Nucelic Acid Purification</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                  data-gtm-category="d-header"
+                  data-gtm-label="qpcr"
+                  data-gtm-action="click"
+                >qPCR/RT-PCR</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                  data-gtm-category="d-header"
+                  data-gtm-label="elisa"
+                  data-gtm-action="click"
+                >ELISA</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ngs-prep"
+                  data-gtm-action="click"
+                >NGS Library Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                  data-gtm-category="d-header"
+                  data-gtm-label="basic"
+                  data-gtm-action="click"
+                >Basic Pipetting</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`protocols`)">
+            <span class="menu-span" id="menu-protocols">Protocols</span>
+            <ul class="navbar-ul protocol-nav visible" id="protocols">
+              <div class="navbar-ul-div">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-tools"
+                      data-gtm-action="click"
+                    >Protocol Options</a>
+                    <span>Gain an overview of our protocol creation options</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols/designer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-designer"
+                      data-gtm-action="click"
+                    >Protocol Designer</a>
+                    <span>
+                      Use our graphical user interface to design
+                      protocols
+                    </span>
+                  </li>
+                  <li class="protocol-bottom" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://protocols.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-library"
+                      data-gtm-action="click"
+                    >Protocol Library</a>
+                    <span>Explore our open source database of protocols</span>
+                  </li>
+                </div>
+                <div class="protocol-items">
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://docs.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="opentrons-api"
+                      data-gtm-action="click"
+                    >Python API</a>
+                    <span class="protocol-items-span">
+                      Maximum customization for anyone with python and basic
+                      wetlab skills
+                    </span>
+                  </li>
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-protocols"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span class="protocol-items-span">Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div onclick="closeMenu()">
+                <a
+                  class="blue"
+                  href="https://opentrons.com/request-protocol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="request-protocol-protocols"
+                  data-gtm-action="click"
+                >Request a free custom protocol ›</a>
+              </div>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu('sns')">
+            <span class="menu-span" id="menu-sns">Support &amp; Sales</span>
+            <ul class="navbar-ul protocol-nav sns visible" id="sns">
+              <!-- <span>SUPPORT</span> -->
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales">SUPPORT</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                    >OT-2 Start Guide</a>
+                    <span>You recieved your robot, here's what's next</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help</a>
+                    <span>Answer common technical questions</span>
+                  </li>
+                  <li onclick="closeMenu()" class="github">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales"></span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact-support"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-support"
+                    data-gtm-action="click"
+                  >Contact support ›</a>
+                </div>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+              <div class="navbar-ul-li order-online">
+                <div class="protocol-items">
+                  <li onclick="close()">
+                    <span class="support-sales">SALES</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                    >Order online</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-sales"
+                    data-gtm-action="click"
+                  >Contact sales ›</a>
+                </div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="cta-demo-button"
+                  data-gtm-action="click"
+                  class="btn schedule-demo"
+                  href="https://opentrons.com/demo"
+                >Schedule a demo ›</a>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+            </ul>
+          </li>
+        </ul>
+        <div class="schedule-menu desktop-schedule-menu">
+          <div class="schedule-div">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+      </div>
+      <div class="div-sub-menu">
+        <div class="mobile-menu mobilemenufixed dnone">
+          <ul>
+            <li onclick="showMenu('about')">About</li>
+            <li onclick="showMenu('products')">Products</li>
+            <li onclick="showMenu('applications')">Applications</li>
+            <li onclick="showMenu('protocols')">Protocols</li>
+            <li onclick="showMenu('sns')">Support &amp; Sales</li>
+          </ul>
+          <div class="menu-button" onclick="close()">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+        <div class="sub-menu about sub-menu-about">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>About</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/about"
+                data-gtm-category="d-header"
+                data-gtm-label="about"
+                data-gtm-action="click"
+              >Mission ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/team"
+                data-gtm-category="d-header"
+                data-gtm-label="team"
+                data-gtm-action="click"
+              >Our Team ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://blog.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="blog"
+                data-gtm-action="click"
+              >Blog ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu products sub-menu-products">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Products</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/ot-2"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2"
+                data-gtm-action="click"
+              >OT-2 Robot ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/modules"
+                data-gtm-category="d-header"
+                data-gtm-label="modules"
+                data-gtm-action="click"
+              >OT-2 Add-ons ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pipettes"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2-pipettes"
+                data-gtm-action="click"
+              >OT-2 Pipettes ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/opentrons-tips"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tips"
+                data-gtm-action="click"
+              >Pipette Tips ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/racks-and-adapters"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tube-racks"
+                data-gtm-action="click"
+              >Racks &amp; Adapters ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/mag-bead-kits"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="reagents"
+                data-gtm-action="click"
+              >Reagents ›</a>
+            </li>
+            <li class="blue" onclick="close()">
+              <a
+                onclick="close()"
+                class="blue"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="sub-menu applications sub-menu-applications"
+        >
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Applications</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pcr-sample-prep"
+                data-gtm-category="d-header"
+                data-gtm-label="prep"
+                data-gtm-action="click"
+              >PCR Sample Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                data-gtm-category="d-header"
+                data-gtm-label="nap"
+                data-gtm-action="click"
+              >Nucelic Acid Purification ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                data-gtm-category="d-header"
+                data-gtm-label="qpcr"
+                data-gtm-action="click"
+              >qPCR/RT-PCR ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                data-gtm-category="d-header"
+                data-gtm-label="elisa"
+                data-gtm-action="click"
+              >ELISA ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                data-gtm-category="d-header"
+                data-gtm-label="ngs-prep"
+                data-gtm-action="click"
+              >NGS Library Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                data-gtm-category="d-header"
+                data-gtm-label="basic"
+                data-gtm-action="click"
+              >Basic Pipetting ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu protocols sub-menu-protocols">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Protocols</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-tools"
+                data-gtm-action="click"
+              >Protocol Options ›</a>
+              <span>Gain an overview of our protocol creation options</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols/designer"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-designer"
+                data-gtm-action="click"
+              >Protocol Designer ›</a>
+              <span>Use our graphical user interface to design protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-library"
+                data-gtm-action="click"
+              >Protocol Library ›</a>
+              <span>Explore our open source database of protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="opentrons-api"
+                data-gtm-action="click"
+              >Python API ›</a>
+              <span>
+                Maximum customization for anyone with python and basic weblab
+                skills
+              </span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/Opentrons"
+                data-gtm-category="d-header"
+                data-gtm-label="github-protocols"
+                data-gtm-action="click"
+              >Github ›</a>
+              <span>Contribute to open source protocol repository</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="blue"
+                href="https://opentrons.com/request-protocol"
+                data-gtm-category="d-header"
+                data-gtm-label="request-protocol-protocols"
+                data-gtm-action="click"
+              >Request a free custom protocol ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu sns sub-menu-sns">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Support &amp; Sales</span>
+          </div>
+          <ul class="sns-ul">
+            <section class="sns-sales">
+              <!-- <span class="sales">SALES</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron">SALES</span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                      class="order-line-mobile"
+                    >Order online ›</a>
+                  </div>
+                </section>
+              </li>
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron mobile-contact"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="sales-link mobile-contact-sales"
+                      href="https://opentrons.com/contact"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-sales"
+                      data-gtm-action="click"
+                    >Contact sales ›</a>
+                  </div>
+                </section>
+              </li>
+              <li>
+                <section class="sns-support-section">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <!-- <a
+                      class="sales-link schedule-demo-mobile"
+                      data-gtm-category="d-header"
+                      data-gtm-label="schedule-demo"
+                      data-gtm-action="click"
+                      onclick="openModal('demo')"
+                    >Schedule a demo ›</a> -->
+                  </div>
+                </section>
+              </li>
+            </section>
+            <section class="sns-support">
+              <!-- <span class="support">SUPPORT</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron">SUPPORT</span>
+                  <div class="ot-2-start-guide support-items">
+                    <a
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                      class="ot-2-guide"
+                    >OT-2 Start Guide ›</a>
+                    <span class="ot-2-guide">You received your robot, here's what's next</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help ›</a>
+                    <span>Answer common technical questions</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github ›</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library ›</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app ›</a>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="blue-text sales-link"
+                      href="https://opentrons.com/contact-support"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-support"
+                      data-gtm-action="click"
+                    >Contact support ›</a>
+                  </div>
+                </section>
+              </li>
+            </section>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>   
+
+    <div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                
+  <div class="section" id="building-block-commands">
+<span id="v2-atomic-commands"></span><h1>Building Block Commands<a class="headerlink" href="#building-block-commands" title="Permalink to this headline">¶</a></h1>
+<p>Basic commands are the smallest individual actions that can be completed on a robot.
+For example, a liquid transfer at its core, found in <a class="reference internal" href="new_complex_commands.html#v2-complex-commands"><span class="std std-ref">Complex Commands</span></a>, can be separated into a series of <code class="docutils literal"><span class="pre">pick_up_tip()</span></code>, <code class="docutils literal"><span class="pre">aspirate()</span></code>, <code class="docutils literal"><span class="pre">dispense()</span></code>, <code class="docutils literal"><span class="pre">drop_tip()</span></code> etc.</p>
+<p>For the purposes of this section we can assume that we already have the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="n">tiprack</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;corning_96_wellplate_360ul_flat&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plate</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;opentrons_96_tiprack_300ul&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span><span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="n">mount</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="c1"># the example code below would go here, inside the run function</span>
+</pre></div>
+</div>
+<p>This loads a <a class="reference external" href="https://labware.opentrons.com/corning_96_wellplate_360ul_flat">Corning 96 Well Plate</a> in slot 2 and a <a class="reference external" href="https://labware.opentrons.com/opentrons_96_tiprack_300ul">Opentrons 300ul Tiprack</a> in slot 3, and uses a P300 Single pipette.</p>
+<p>We save the result of <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext.load_instrument" title="opentrons.protocol_api.contexts.ProtocolContext.load_instrument"><code class="xref py py-meth docutils literal"><span class="pre">ProtocolContext.load_instrument()</span></code></a> in the variable <code class="docutils literal"><span class="pre">pipette</span></code>. This is always an instance of the <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext" title="opentrons.protocol_api.contexts.InstrumentContext"><code class="xref py py-class docutils literal"><span class="pre">opentrons.protocol_api.contexts.InstrumentContext</span></code></a> class. Any method or attribute that has to do with a given pipette (as opposed to the OT-2 as a whole) is part of this class.</p>
+<div class="section" id="tip-handling">
+<h2>Tip Handling<a class="headerlink" href="#tip-handling" title="Permalink to this headline">¶</a></h2>
+<p>When we handle liquids with a pipette, we are constantly exchanging old, used tips for new ones to prevent cross-contamination between our wells. To help with this constant need, we describe in this section a few methods for getting new tips, and removing tips from a pipette.</p>
+<div class="section" id="pick-up-tip">
+<h3>Pick Up Tip<a class="headerlink" href="#pick-up-tip" title="Permalink to this headline">¶</a></h3>
+<p>Before any liquid handling can be done, your pipette must have a tip on it. The command <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip" title="opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.pick_up_tip()</span></code></a> will move the pipette over to the specified tip, the press down into it to create a vacuum seal. The below example picks up the tip at location <code class="docutils literal"><span class="pre">'A1'</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">(</span><span class="n">tiprack</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>If you have associated a tiprack with your pipette such as in the <a class="reference internal" href="new_pipette.html#new-pipette"><span class="std std-ref">Pipettes</span></a> section or <a class="reference internal" href="new_protocol_api.html#protocol-api-protocols-and-instruments"><span class="std std-ref">Protocols and Instruments</span></a>, then you can simply call</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop-tip">
+<h3>Drop Tip<a class="headerlink" href="#drop-tip" title="Permalink to this headline">¶</a></h3>
+<p>Once finished with a tip, the pipette will remove the tip when we call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.drop_tip" title="opentrons.protocol_api.contexts.InstrumentContext.drop_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.drop_tip()</span></code></a>. We can specify where to drop the tip by passing in a location. The below example drops the tip back at its originating location on the tip rack.
+If no location is specified, it will go to the fixed trash location on the deck.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">(</span><span class="n">tiprack</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Instead of returning a tip to the tip rack, we can also drop it in an alternative trash container besides the fixed trash on the deck.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">trash</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;trash-box&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">(</span><span class="n">trash</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="return-tip">
+<h3>Return Tip<a class="headerlink" href="#return-tip" title="Permalink to this headline">¶</a></h3>
+<p>When we need to return the tip to its originating location on the tip rack, we can simply call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.return_tip" title="opentrons.protocol_api.contexts.InstrumentContext.return_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.return_tip()</span></code></a>. The example below will automatically return the tip to <code class="docutils literal"><span class="pre">'A3'</span></code> on the tip rack.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">(</span><span class="n">tiprack</span><span class="p">[</span><span class="s1">&#39;A3&#39;</span><span class="p">])</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">return_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>For the purposes of this section we can assume that we already have the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="n">tiprack</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span>
+        <span class="s1">&#39;corning_96_wellplate_360ul_flat&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plate</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span>
+        <span class="s1">&#39;opentrons_96_tiprack_300ul&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span>
+        <span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="n">mount</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tip_racks</span><span class="o">=</span><span class="p">[</span><span class="n">tiprack</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This loads a <a class="reference external" href="https://labware.opentrons.com/corning_96_wellplate_360ul_flat">Corning 96 Well Plate</a> in slot 2 and a <a class="reference external" href="https://labware.opentrons.com/opentrons_96_tiprack_300ul">Opentrons 300ul Tiprack</a> in slot 3, and uses a P300 Single pipette.</p>
+<div class="section" id="iterating-through-tips">
+<h4>Iterating Through Tips<a class="headerlink" href="#iterating-through-tips" title="Permalink to this headline">¶</a></h4>
+<p>Now that we have two tip racks attached to the pipette, we can automatically step through each tip whenever we call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip" title="opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.pick_up_tip()</span></code></a>. We then have the option to either <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.return_tip" title="opentrons.protocol_api.contexts.InstrumentContext.return_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.return_tip()</span></code></a> to the tip rack, or we can <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.drop_tip" title="opentrons.protocol_api.contexts.InstrumentContext.drop_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.drop_tip()</span></code></a> to remove the tip in the attached trash container.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>  <span class="c1"># picks up tip_rack_1:A1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">return_tip</span><span class="p">()</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>  <span class="c1"># picks up tip_rack_1:A2</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">()</span>     <span class="c1"># automatically drops in trash</span>
+
+<span class="c1"># use loop to pick up tips tip_rack_1:A3 through tip_rack_2:H12</span>
+<span class="n">tips_left</span> <span class="o">=</span> <span class="mi">94</span> <span class="o">+</span> <span class="mi">96</span> <span class="c1"># add up the number of tips leftover in both tipracks</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tips_left</span><span class="p">):</span>
+    <span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+    <span class="n">pipette</span><span class="o">.</span><span class="n">return_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If we try to <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip" title="opentrons.protocol_api.contexts.InstrumentContext.pick_up_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.pick_up_tip()</span></code></a> again when all the tips have been used, the Opentrons API will show you an error.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you run the cell above, and then uncomment and run the cell below, you will get an error because the pipette is out of tips.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># this will raise an exception if run after the previous code block</span>
+<span class="c1"># pipette.pick_up_tip()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="liquid-control">
+<h2>Liquid Control<a class="headerlink" href="#liquid-control" title="Permalink to this headline">¶</a></h2>
+<p>This is the fun section, where we get to move things around and pipette! This section describes the <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext" title="opentrons.protocol_api.contexts.InstrumentContext"><code class="xref py py-class docutils literal"><span class="pre">InstrumentContext</span></code></a> &#8216;s many liquid-handling commands, as well as how to command the OT-2 to a specific point.
+Please note that the default now for pipette aspirate and dispense location is a 1mm offset from the <strong>bottom</strong> of the well now.</p>
+<hr class="docutils" />
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">):</span>
+    <span class="n">tiprack</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;corning_96_wellplate_360ul_flat&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plate</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;opentrons_96_tiprack_300ul&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span><span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="n">mount</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tip_racks</span><span class="o">=</span><span class="p">[</span><span class="n">tiprack</span><span class="p">])</span>
+    <span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This loads a <a class="reference external" href="https://labware.opentrons.com/corning_96_wellplate_360ul_flat">Corning 96 Well Plate</a> in slot 2 and a <a class="reference external" href="https://labware.opentrons.com/opentrons_96_tiprack_300ul">Opentrons 300ul Tiprack</a> in slot 3, and uses a P300 Single pipette.</p>
+<div class="section" id="aspirate">
+<span id="new-aspirate"></span><h3>Aspirate<a class="headerlink" href="#aspirate" title="Permalink to this headline">¶</a></h3>
+<p>To aspirate is to pull liquid up into the pipette&#8217;s tip. When calling <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.aspirate" title="opentrons.protocol_api.contexts.InstrumentContext.aspirate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.aspirate()</span></code></a> on a pipette, we can specify how many microliters, and at which location, to draw liquid from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">aspirate</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>  <span class="c1"># aspirate 50uL from plate:A1</span>
+</pre></div>
+</div>
+<p>Now our pipette&#8217;s tip is holding 50uL.</p>
+<p>We can also simply specify how many microliters to aspirate, and not mention a location. The pipette in this circumstance will aspirate from its current location (which we previously set as <code class="docutils literal"><span class="pre">plate['A1'])</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">aspirate</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>                     <span class="c1"># aspirate 50uL from current position</span>
+</pre></div>
+</div>
+<p>Now our pipette&#8217;s tip is holding 100uL.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the OT-2 will move to 1mm above the bottom of the target well before aspirating.
+You can change this by using a well position function like <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.labware.Well.bottom" title="opentrons.protocol_api.labware.Well.bottom"><code class="xref py py-meth docutils literal"><span class="pre">Well.bottom()</span></code></a> (see
+<a class="reference internal" href="new_labware.html#v2-location-within-wells"><span class="std std-ref">Specifying Position Within Wells</span></a>) every time you call <code class="docutils literal"><span class="pre">aspirate</span></code>, or - if you want to change
+the default throughout your protocol - you can change the default offset with
+<a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.well_bottom_clearance" title="opentrons.protocol_api.contexts.InstrumentContext.well_bottom_clearance"><code class="xref py py-attr docutils literal"><span class="pre">InstrumentContext.well_bottom_clearance</span></code></a> (see <a class="reference internal" href="new_pipette.html#new-default-op-positions"><span class="std std-ref">Default Positions Within Wells</span></a>).</p>
+</div>
+</div>
+<div class="section" id="dispense">
+<span id="new-dispense"></span><h3>Dispense<a class="headerlink" href="#dispense" title="Permalink to this headline">¶</a></h3>
+<p>To dispense is to push out liquid from the pipette&#8217;s tip. The usage of <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.dispense" title="opentrons.protocol_api.contexts.InstrumentContext.dispense"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.dispense()</span></code></a> in the Opentrons API is nearly identical to <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.aspirate" title="opentrons.protocol_api.contexts.InstrumentContext.aspirate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.aspirate()</span></code></a>, in that you can specify microliters and location, or only microliters.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">dispense</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">])</span> <span class="c1"># dispense 50uL to plate:B1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">dispense</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>              <span class="c1"># dispense 50uL to current position</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the OT-2 will move to 1mm above the bottom of the target well before dispensing.
+You can change this by using a well position function like <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.labware.Well.bottom" title="opentrons.protocol_api.labware.Well.bottom"><code class="xref py py-meth docutils literal"><span class="pre">Well.bottom()</span></code></a> (see
+<a class="reference internal" href="new_labware.html#v2-location-within-wells"><span class="std std-ref">Specifying Position Within Wells</span></a>) every time you call <code class="docutils literal"><span class="pre">dispense</span></code>, or - if you want to change
+the default throughout your protocol - you can change the default offset with
+<a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.well_bottom_clearance" title="opentrons.protocol_api.contexts.InstrumentContext.well_bottom_clearance"><code class="xref py py-attr docutils literal"><span class="pre">InstrumentContext.well_bottom_clearance</span></code></a> (see <a class="reference internal" href="new_pipette.html#new-default-op-positions"><span class="std std-ref">Default Positions Within Wells</span></a>).</p>
+</div>
+</div>
+<div class="section" id="blow-out">
+<span id="new-blow-out"></span><span id="id5"></span><h3>Blow Out<a class="headerlink" href="#blow-out" title="Permalink to this headline">¶</a></h3>
+<p>To blow out is to push an extra amount of air through the pipette&#8217;s tip, so as to make sure that any remaining droplets are expelled.</p>
+<p>When calling <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.blow_out" title="opentrons.protocol_api.contexts.InstrumentContext.blow_out"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.blow_out()</span></code></a>, we have the option to specify a location to blow out the remaining liquid. If no location is specified, the pipette will blow out from its current position.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">blow_out</span><span class="p">()</span>            <span class="c1"># blow out in current location</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">blow_out</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B3&#39;</span><span class="p">])</span> <span class="c1"># blow out in current plate:B3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touch-tip">
+<span id="id6"></span><h3>Touch Tip<a class="headerlink" href="#touch-tip" title="Permalink to this headline">¶</a></h3>
+<p>To touch tip is to move the pipette&#8217;s currently attached tip to four opposite edges of a well, for the purpose of knocking off any droplets that might be hanging from the tip.</p>
+<p>When calling <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.touch_tip" title="opentrons.protocol_api.contexts.InstrumentContext.touch_tip"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.touch_tip()</span></code></a> on a pipette, we have the option to specify a location where the tip will touch the inner walls.</p>
+<p>Touch tip can take up to 4 arguments: <code class="docutils literal"><span class="pre">touch_tip(location,</span> <span class="pre">radius,</span> <span class="pre">v_offset,</span> <span class="pre">speed)</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">touch_tip</span><span class="p">()</span>            <span class="c1"># touch tip within current location</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">touch_tip</span><span class="p">(</span><span class="n">v_offset</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># touch tip 2mm below the top of the current location</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">touch_tip</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">])</span> <span class="c1"># touch tip within plate:B1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">touch_tip</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">],</span> <span class="c1"># touch tip in plate:B1, at 75% of total radius and -2mm from top of well</span>
+                  <span class="n">radius</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+                  <span class="n">v_offset</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mix">
+<span id="id7"></span><h3>Mix<a class="headerlink" href="#mix" title="Permalink to this headline">¶</a></h3>
+<p>Mixing is simply performing a series of <code class="docutils literal"><span class="pre">aspirate()</span></code> and <code class="docutils literal"><span class="pre">dispense()</span></code> commands in a row on a single location. However, instead of having to write those commands out every time, the Opentrons API allows you to simply say <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.mix" title="opentrons.protocol_api.contexts.InstrumentContext.mix"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.mix()</span></code></a>.</p>
+<p>The mix command takes three arguments: <code class="docutils literal"><span class="pre">mix(repetitions,</span> <span class="pre">volume,</span> <span class="pre">location)</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">mix</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">])</span>   <span class="c1"># mix 4 times, 100uL, in plate:A2</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">mix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>                  <span class="c1"># mix 3 times, 50uL, in current location</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">mix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>                      <span class="c1"># mix 2 times, pipette&#39;s max volume, in current location</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="air-gap">
+<span id="id8"></span><h3>Air Gap<a class="headerlink" href="#air-gap" title="Permalink to this headline">¶</a></h3>
+<p>Some liquids need an extra amount of air in the pipette&#8217;s tip to prevent it from sliding out. A call to <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.air_gap" title="opentrons.protocol_api.contexts.InstrumentContext.air_gap"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.air_gap()</span></code></a> with a microliter amount will aspirate that much air into the tip.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">aspirate</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">])</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">air_gap</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="moving">
+<h2>Moving<a class="headerlink" href="#moving" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="move-to">
+<h3>Move To<a class="headerlink" href="#move-to" title="Permalink to this headline">¶</a></h3>
+<p>You can use <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.move_to" title="opentrons.protocol_api.contexts.InstrumentContext.move_to"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.move_to()</span></code></a> to move a pipette any location on the deck.</p>
+<p>For example, we can move to the first tip in our tip rack:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">tiprack</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You can also specify at what height you would like the robot to move to inside of a location using <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.labware.Well.top" title="opentrons.protocol_api.labware.Well.top"><code class="xref py py-meth docutils literal"><span class="pre">Well.top()</span></code></a> and <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.labware.Well.bottom" title="opentrons.protocol_api.labware.Well.bottom"><code class="xref py py-meth docutils literal"><span class="pre">Well.bottom()</span></code></a> methods on that location (more on these methods and others like them in the <a class="reference internal" href="new_labware.html#v2-location-within-wells"><span class="std std-ref">Specifying Position Within Wells</span></a> section):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bottom</span><span class="p">())</span>  <span class="c1"># move to the bottom of well A1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">top</span><span class="p">())</span>     <span class="c1"># move to the top of well A1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bottom</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># move to 2mm above the bottom of well A1</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">top</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>   <span class="c1"># move to 2mm below the top of well A1</span>
+</pre></div>
+</div>
+<p>The above commands will cause the robot&#8217;s head to first move upwards, then over to above the target location, then finally downwards until the target location is reached.
+If instead you would like the robot to move in a straight line to the target location, you can set the movement strategy to <code class="docutils literal"><span class="pre">'direct'</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span> <span class="n">force_direct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Moving without an arc will run the risk of colliding with things on your deck. Be very careful when using this option.</p>
+</div>
+<p>Usually the above option is useful when moving inside of a well. Take a look at the below sequence of movements, which first move the head to a well, and use &#8216;direct&#8217; movements inside that well, then finally move on to a different well.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bottom</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">force_direct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">top</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="n">force_direct</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="utility-commands">
+<h2>Utility Commands<a class="headerlink" href="#utility-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="delay">
+<h3>Delay<a class="headerlink" href="#delay" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext.delay" title="opentrons.protocol_api.contexts.ProtocolContext.delay"><code class="xref py py-meth docutils literal"><span class="pre">ProtocolContext.delay()</span></code></a> (a method of <code class="docutils literal"><span class="pre">ProtocolContext</span></code> since it concerns the robot as a whole) pauses your protocol for any given number of minutes or seconds. The value passed into <code class="docutils literal"><span class="pre">delay()</span></code> is the number of minutes or seconds the robot will wait until moving on to the next commands.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">protocol</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>             <span class="c1"># pause for 2 seconds</span>
+<span class="n">protocol</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>             <span class="c1"># pause for 5 minutes</span>
+<span class="n">protocol</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># pause for 5 minutes and 2 seconds</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="user-specified-pause">
+<h3>User-Specified Pause<a class="headerlink" href="#user-specified-pause" title="Permalink to this headline">¶</a></h3>
+<p>The method <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext.pause" title="opentrons.protocol_api.contexts.ProtocolContext.pause"><code class="xref py py-meth docutils literal"><span class="pre">ProtocolContext.pause()</span></code></a> will pause protocol execution at a specific step.
+You can resume by pressing &#8216;resume&#8217; in your OT App. You can optionally specify a message that
+will be displayed in the Opentrons app when protocol execution pauses.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="c1"># The start of your protocol goes here...</span>
+
+    <span class="c1"># The robot stops here until you press resume. It will display the message in</span>
+    <span class="c1"># the Opentrons app. You do not need to specify a message, but it makes things</span>
+    <span class="c1"># more clear.</span>
+    <span class="n">protocol</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="s1">&#39;Time to take a break&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="homing">
+<h3>Homing<a class="headerlink" href="#homing" title="Permalink to this headline">¶</a></h3>
+<p>You can manually request that the robot home during protocol execution. This is typically
+not necessary; however, if you have some custom labware or setup that you suspect may
+make the robot crash or skip steps, or if at any point you will disengage motors or move
+the gantry with your hand, you may want to command a home afterwards.</p>
+<p>To home the entire robot, you can call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext.home" title="opentrons.protocol_api.contexts.ProtocolContext.home"><code class="xref py py-meth docutils literal"><span class="pre">ProtocolContext.home()</span></code></a>.</p>
+<p>To home a specific pipette&#8217;s Z stage and plunger, you can call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.home" title="opentrons.protocol_api.contexts.InstrumentContext.home"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.home()</span></code></a>.</p>
+<p>To home a specific pipette&#8217;s plunger only, you can call <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.home_plunger" title="opentrons.protocol_api.contexts.InstrumentContext.home_plunger"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.home_plunger()</span></code></a>.</p>
+<p>None of these functions take any arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span><span class="p">,</span> <span class="n">types</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="n">pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span><span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">protocol</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="c1"># Homes the gantry, z axes, and plungers</span>
+    <span class="n">pipette</span><span class="o">.</span><span class="n">home</span><span class="p">()</span>  <span class="c1"># Homes the right z axis and plunger</span>
+    <span class="n">pipette</span><span class="o">.</span><span class="n">home_plunger</span><span class="p">()</span> <span class="c1"># Homes the right plunger</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="comment">
+<h3>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h3>
+<p>The method <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.ProtocolContext.comment" title="opentrons.protocol_api.contexts.ProtocolContext.comment"><code class="xref py py-meth docutils literal"><span class="pre">ProtocolContext.comment()</span></code></a> lets you display messages in the Opentrons app
+during protocol execution:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span><span class="p">,</span> <span class="n">types</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="n">protocol</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="s1">&#39;Hello, world!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Opentrons API</a></h1>
+
+
+
+<p class="blurb">Simple Biology Lab Protocol Coding</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=opentrons&repo=opentrons&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<!-- Navbar override to always show hidden toctree elements in sidebar
+     Think of this like a file (or subdirectory) specific override to
+     the :showhidden: toctree directive or sidebar_show_hidden config
+     variable. Can be removed when APIV2 is public and includehidden
+     set back to theme_sidebar_showhidden
+-->
+<h3>Table Of Contents</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writing.html">Design with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v1/apiv1index.html">Opentrons API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="apiv2index.html">Opentrons API Version 2</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="new_pipette.html">Pipettes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_labware.html">Labware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_modules.html">Hardware Modules</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building Block Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tip-handling">Tip Handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pick-up-tip">Pick Up Tip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drop-tip">Drop Tip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-tip">Return Tip</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#iterating-through-tips">Iterating Through Tips</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#liquid-control">Liquid Control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#aspirate">Aspirate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispense">Dispense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blow-out">Blow Out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touch-tip">Touch Tip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mix">Mix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#air-gap">Air Gap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#moving">Moving</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#move-to">Move To</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#delay">Delay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-specified-pause">User-Specified Pause</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#homing">Homing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comment">Comment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="new_complex_commands.html">Complex Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_protocol_api.html">API Version 2 Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_advanced_running.html">Running Protocols Directly On The Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apiv2index.html#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/OpentronsAPI.pdf">Download As PDF</a></li>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/ot1/index.html">OT 1 API</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="apiv2index.html">Opentrons API Version 2</a><ul>
+      <li>Previous: <a href="new_modules.html" title="previous chapter">Hardware Modules</a></li>
+      <li>Next: <a href="new_complex_commands.html" title="next chapter">Complex Commands</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer>
+  <div class="wrapper">
+
+    <section class="social-signup">
+      <div class="social-links">
+        <a href="https://www.facebook.com/OpenTrons-Labworks/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Facebook"
+        ><img src="https://s3.amazonaws.com/opentrons-images/website/logo_facebook.png" alt="facebook logo"/></a>
+        <a href="https://twitter.com/OpenTrons_" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Twitter"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_twitter.png" alt="twitter logo" /></a>
+        <a href="https://www.instagram.com/opentronslab/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Instagram"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_instagram.png" alt="instagram logo" /></a>
+        <a href="https://www.youtube.com/channel/UCvMRmXIxnHs3AutkVhuqaQg" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Youtube"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_youtube.png" alt="youtube logo" /></a>
+      </div>
+      <h3>Sign Up For Our Newsletter</h3>
+      <div id="mc_embed_signup">
+        <form action="//opentrons.us8.list-manage.com/subscribe/post?u=000595683fb96c5fb3c54cf53&amp;id=ba66060a9c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <input type="email" value="" name="EMAIL" class="email-newsletter" id="mce-EMAIL" placeholder="email address" required
+            ga-on="input"
+            ga-event-category="Mailchimp"
+            ga-event-action="Enter Email"
+            >
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_000595683fb96c5fb3c54cf53_ba66060a9c" tabindex="-1" value=""></div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="gray subscribe"
+            ga-on="click"
+            ga-event-category="Mailchimp"
+            ga-event-action="Newsletter Signup">
+          </div>
+        </form>
+      </div>
+      <p class="copyrite">&#169;&nbsp;OPENTRONS <script type="text/javascript">document.write(new Date().getFullYear())</script></p>
+    </section>
+    <section class="footer-menu">
+      <ul>
+        <li>Products</li>
+        <li><a href="https://opentrons.com/robots" >OT-One</a></li>
+        <li><a href="https://opentrons.com/ot-2" >OT-2</a></li>
+        <li><a href="https://opentrons.com/pipettes" >OT-2 Pipettes</a></li>
+        <li><a href="https://opentrons.com/modules" >Modules</a></li>
+        <li><a href="https://opentrons.com/ot-app" >OT App</a></li>
+        <li><a href="https://protocols.opentrons.com/" target="_blank">Protocol Library</a></li>
+      </ul>
+      <ul>
+        <li>Company</li>
+        <li><a href="https://opentrons.com/about" >About</a></li>
+        <li><a href="https://opentrons.com/team" >Team</a></li>
+        <li><a href="https://blog.opentrons.com/">Blog</a></li>
+        <li><a href="https://opentrons.com/contact" >Contact Us</a></li>
+        <li><a href="https://opentrons.com/jobs" target="_blank" class="hiring">WE'RE HIRING</a></li>
+      </ul>
+      <ul>
+        <li>Resources</li>
+        <li><a href="https://support.opentrons.com" target="_blank">Support</a></li>
+          <li><a href="http://docs.opentrons.com/" target="_blank">Opentrons API</a></li>
+          <li><a href="https://github.com/Opentrons/opentrons/blob/edge/CONTRIBUTING.md" target="_blank">Open Source</a></li>
+      </ul>
+      <ul>
+        <li><a href="https://shop.opentrons.com/" class="buy">Buy</a></li>
+      </ul>
+
+    </section>
+
+  </div>
+</footer>
+<script>
+
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCDX9CX');
+
+</script>
+<script>
+  function toggleMenu(menu) {
+    var element = document.querySelector(`#${menu}`)
+    var elementList = document.querySelectorAll('.navbar-ul')
+    elementList.forEach(e => {
+      if (e !== element) {
+        e.previousElementSibling.classList.add('notActive')
+        e.classList.add('visible')
+      }
+    })
+    if (!element.classList.contains('visible')) {
+      element.classList.add('visible')
+      elementList.forEach(e => {
+        e.previousElementSibling.classList.remove('notActive')
+      })
+    } else {
+      element.classList.remove('visible')
+      element.previousElementSibling.classList.remove('notActive')
+    }
+  }
+  function close() {
+    var elementList = document.querySelectorAll('.navbar-ul')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    elementList.forEach(e => {
+      e.classList.add('visible')
+      e.previousElementSibling.classList.remove('notActive')
+    })
+    subMenu.forEach(e => {
+      e.classList.remove('showmenu')
+      console.dir(e)
+    })
+  }
+  function toggleOpen() {
+    var mobile = document.querySelector('.mobile-hamburger')
+    var mobileMenu = document.querySelector('.mobile-menu')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    if (mobileMenu.classList.contains('dnone')) {
+      mobileMenu.classList.remove('dnone')
+    } else {
+      mobileMenu.classList.add('dnone')
+    }
+    subMenu.forEach(e => {
+      if(e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+    mobile.classList.toggle('open')
+    document.body.classList.toggle('mobile-scrolling')
+  }
+  function showMenu(menu) {
+    var element = document.querySelector(`.sub-menu-${menu}`)
+    if (element.classList.contains('showmenu')) {
+      element.classList.remove('showmenu')
+    } else {
+      element.classList.add('showmenu')
+    }
+  }
+  function closeMenu() {
+    var element = document.querySelectorAll('.sub-menu')
+    element.forEach(e => {
+      if (e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+  }
+  var navbar = document.querySelector('.navbar-menu')
+  document.addEventListener('click', function(event) {
+    var isClickInside = navbar.contains(event.target)
+    if (!isClickInside && window.innerWidth >= 1024) {
+      close()
+    }
+  })
+
+  </script>
+
+
+ 
+  </body>
+</html>

@@ -1,0 +1,2005 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Complex Commands &#8212; Opentrons API Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/new-nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/nav.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/override_master.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.12.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Opentrons API Documentation" href="../index.html" />
+    <link rel="up" title="Opentrons API Version 2" href="apiv2index.html" />
+    <link rel="next" title="API Version 2 Reference" href="new_protocol_api.html" />
+    <link rel="prev" title="Building Block Commands" href="new_atomic_commands.html" />
+ 
+<link rel="stylesheet" href="../_static/custom.css" type="text/css" />  
+<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<script src="../_static/Akko-Pro-All.js"></script>
+<!-- INTERCOM -->
+<script>
+window.intercomSettings = {
+  app_id: 'ukpodv2l'
+};
+</script>
+<script>
+(function () {
+  var w = window;
+  var ic = w.Intercom;
+  if (typeof ic === "function") {
+    ic('reattach_activator');
+    ic('update', intercomSettings);
+  } else {
+    var d = document;
+    var i = function() {
+      i.c(arguments)
+    };
+    i.q = [];
+    i.c = function(args) {
+      i.q.push(args)
+    };
+    w.Intercom = i;
+
+    function l () {
+      var s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://widget.intercom.io/widget/ukpodv2l';
+      var x = d.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (w.attachEvent) {
+        w.attachEvent('onload', l);
+    } else {
+        w.addEventListener('load', l, false);
+    }
+  }
+})()
+</script>
+
+  </head>
+  <body role="document">
+
+<header id="nav">
+  <nav class="docs-navbar">
+    <div class="container">
+      <div class="container-div"></div>
+    <ul>
+      <li>
+        <a
+          href="https://docs.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="opentrons-api"
+          data-gtm-action="click"
+          >Python API</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://labware.opentrons.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="labware-library"
+          data-gtm-action="click"
+          >Labware Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://protocols.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-library"
+          data-gtm-action="click"
+          >Protocol Library</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://designer.opentrons.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-gtm-category="g-toolbar"
+          data-gtm-label="protocol-designer"
+          data-gtm-action="click"
+          >Protocol Designer</a
+        >
+      </li>
+    </ul>
+    </div>
+  </nav>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-container">
+        <div class="navbar-logo" onclick="close()">
+          <a
+            href="https://opentrons.com"
+            class="brand"
+            title="Home"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm-category="d-header"
+            data-gtm-label="logo"
+            data-gtm-action="click"
+          >
+            <img
+              class="img-logo"
+              src="https://s3.amazonaws.com/opentrons-images/website/ot_logo_full.png"
+              alt="Opentrons Home"
+            >
+          </a>
+        </div>
+        <div class="schedule-menu mobile-schedule-menu">
+          <div class="schedule-div">
+            <a
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales"
+              data-gtm-action="click"
+            >Contact sales</a>
+          </div>
+          <div class="mobile-hamburger">
+            <div id="nav-collapse" onclick="toggleOpen()">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-menu">
+        <ul class="main-menu">
+          <li class="main-menu-li about" onclick="toggleMenu(`about`)">
+            <span class="menu-span" id="menu-about">About</span>
+            <ul id="about" class="navbar-ul visible">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/about"
+                  data-gtm-category="d-header"
+                  data-gtm-label="about"
+                  data-gtm-action="click"
+                >Mission</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/team"
+                  data-gtm-category="d-header"
+                  data-gtm-label="team"
+                  data-gtm-action="click"
+                >Our Team</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://blog.opentrons.com/"
+                  data-gtm-category="d-header"
+                  data-gtm-label="blog"
+                  data-gtm-action="click"
+                >Blog</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`products`)">
+            <span class="menu-span" id="menu-products">Products</span>
+            <ul class="navbar-ul visible" id="products">
+              <li onclick="closeMenu()">
+                <a
+                  href="https://opentrons.com/ot-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2"
+                  data-gtm-action="click"
+                >OT-2 Robot</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/modules"
+                  data-gtm-category="d-header"
+                  data-gtm-label="modules"
+                  data-gtm-action="click"
+                >OT-2 Add-ons</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pipettes"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ot-2-pipettes"
+                  data-gtm-action="click"
+                >OT-2 Pipettes</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/opentrons-tips"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tips"
+                  data-gtm-action="click"
+                >Pipette Tips</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/racks-and-adapters"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="tube-racks"
+                  data-gtm-action="click"
+                >Racks &amp; Adapters</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  href="https://shop.opentrons.com/collections/mag-bead-kits"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="reagents"
+                  data-gtm-action="click"
+                >Reagents</a>
+              </li>
+              <a
+                onclick="closeMenu()"
+                class="blue blue-products"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`applications`)">
+            <span class="menu-span" id="menu-applications">Applications</span>
+            <ul class="navbar-ul visible" id="applications">
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://opentrons.com/pcr-sample-prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="prep"
+                  data-gtm-action="click"
+                >PCR Sample Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                  data-gtm-category="d-header"
+                  data-gtm-label="nap"
+                  data-gtm-action="click"
+                >Nucelic Acid Purification</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                  data-gtm-category="d-header"
+                  data-gtm-label="qpcr"
+                  data-gtm-action="click"
+                >qPCR/RT-PCR</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                  data-gtm-category="d-header"
+                  data-gtm-label="elisa"
+                  data-gtm-action="click"
+                >ELISA</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                  data-gtm-category="d-header"
+                  data-gtm-label="ngs-prep"
+                  data-gtm-action="click"
+                >NGS Library Prep</a>
+              </li>
+              <li onclick="closeMenu()">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                  data-gtm-category="d-header"
+                  data-gtm-label="basic"
+                  data-gtm-action="click"
+                >Basic Pipetting</a>
+              </li>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu(`protocols`)">
+            <span class="menu-span" id="menu-protocols">Protocols</span>
+            <ul class="navbar-ul protocol-nav visible" id="protocols">
+              <div class="navbar-ul-div">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-tools"
+                      data-gtm-action="click"
+                    >Protocol Options</a>
+                    <span>Gain an overview of our protocol creation options</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/protocols/designer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-designer"
+                      data-gtm-action="click"
+                    >Protocol Designer</a>
+                    <span>
+                      Use our graphical user interface to design
+                      protocols
+                    </span>
+                  </li>
+                  <li class="protocol-bottom" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://protocols.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="protocol-library"
+                      data-gtm-action="click"
+                    >Protocol Library</a>
+                    <span>Explore our open source database of protocols</span>
+                  </li>
+                </div>
+                <div class="protocol-items">
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://docs.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="opentrons-api"
+                      data-gtm-action="click"
+                    >Python API</a>
+                    <span class="protocol-items-span">
+                      Maximum customization for anyone with python and basic
+                      wetlab skills
+                    </span>
+                  </li>
+                  <li class="protocol-items-li" onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-protocols"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span class="protocol-items-span">Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div onclick="closeMenu()">
+                <a
+                  class="blue"
+                  href="https://opentrons.com/request-protocol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="request-protocol-protocols"
+                  data-gtm-action="click"
+                >Request a free custom protocol ›</a>
+              </div>
+            </ul>
+          </li>
+          <li class="main-menu-li" onclick="toggleMenu('sns')">
+            <span class="menu-span" id="menu-sns">Support &amp; Sales</span>
+            <ul class="navbar-ul protocol-nav sns visible" id="sns">
+              <!-- <span>SUPPORT</span> -->
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales">SUPPORT</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                    >OT-2 Start Guide</a>
+                    <span>You recieved your robot, here's what's next</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help</a>
+                    <span>Answer common technical questions</span>
+                  </li>
+                  <li onclick="closeMenu()" class="github">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </li>
+                </div>
+              </div>
+              <div class="navbar-ul-li">
+                <div class="protocol-items">
+                  <li onclick="closeMenu()">
+                    <span class="support-sales"></span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </li>
+                  <li onclick="closeMenu()">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact-support"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-support"
+                    data-gtm-action="click"
+                  >Contact support ›</a>
+                </div>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+              <div class="navbar-ul-li order-online">
+                <div class="protocol-items">
+                  <li onclick="close()">
+                    <span class="support-sales">SALES</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                    >Order online</a>
+                  </li>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="blue-text"
+                    href="https://opentrons.com/contact"
+                    data-gtm-category="d-header"
+                    data-gtm-label="contact-sales"
+                    data-gtm-action="click"
+                  >Contact sales ›</a>
+                </div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm-category="d-header"
+                  data-gtm-label="cta-demo-button"
+                  data-gtm-action="click"
+                  class="btn schedule-demo"
+                  href="https://opentrons.com/demo"
+                >Schedule a demo ›</a>
+                <!-- <div class="number">718-999-9999</div> -->
+              </div>
+            </ul>
+          </li>
+        </ul>
+        <div class="schedule-menu desktop-schedule-menu">
+          <div class="schedule-div">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn schedule-demo"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+      </div>
+      <div class="div-sub-menu">
+        <div class="mobile-menu mobilemenufixed dnone">
+          <ul>
+            <li onclick="showMenu('about')">About</li>
+            <li onclick="showMenu('products')">Products</li>
+            <li onclick="showMenu('applications')">Applications</li>
+            <li onclick="showMenu('protocols')">Protocols</li>
+            <li onclick="showMenu('sns')">Support &amp; Sales</li>
+          </ul>
+          <div class="menu-button" onclick="close()">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              href="https://opentrons.com/contact"
+              data-gtm-category="d-header"
+              data-gtm-label="contact-sales-primary"
+              data-gtm-action="click"
+            >Contact Sales</a>
+          </div>
+        </div>
+        <div class="sub-menu about sub-menu-about">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>About</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/about"
+                data-gtm-category="d-header"
+                data-gtm-label="about"
+                data-gtm-action="click"
+              >Mission ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/team"
+                data-gtm-category="d-header"
+                data-gtm-label="team"
+                data-gtm-action="click"
+              >Our Team ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://blog.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="blog"
+                data-gtm-action="click"
+              >Blog ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu products sub-menu-products">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Products</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/ot-2"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2"
+                data-gtm-action="click"
+              >OT-2 Robot ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/modules"
+                data-gtm-category="d-header"
+                data-gtm-label="modules"
+                data-gtm-action="click"
+              >OT-2 Add-ons ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pipettes"
+                data-gtm-category="d-header"
+                data-gtm-label="ot-2-pipettes"
+                data-gtm-action="click"
+              >OT-2 Pipettes ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/opentrons-tips"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tips"
+                data-gtm-action="click"
+              >Pipette Tips ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/racks-and-adapters"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="tube-racks"
+                data-gtm-action="click"
+              >Racks &amp; Adapters ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                href="https://shop.opentrons.com/collections/mag-bead-kits"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="reagents"
+                data-gtm-action="click"
+              >Reagents ›</a>
+            </li>
+            <li class="blue" onclick="close()">
+              <a
+                onclick="close()"
+                class="blue"
+                href="https://shop.opentrons.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm-category="d-header"
+                data-gtm-label="all-products"
+                data-gtm-action="click"
+              >Shop all products ›</a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="sub-menu applications sub-menu-applications"
+        >
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Applications</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/pcr-sample-prep"
+                data-gtm-category="d-header"
+                data-gtm-label="prep"
+                data-gtm-action="click"
+              >PCR Sample Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Molecular%20Biology/Nucleic%20Acid%20Purification"
+                data-gtm-category="d-header"
+                data-gtm-label="nap"
+                data-gtm-action="click"
+              >Nucelic Acid Purification ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Sample%20Prep/PCR"
+                data-gtm-category="d-header"
+                data-gtm-label="qpcr"
+                data-gtm-action="click"
+              >qPCR/RT-PCR ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/protocol/TSH_ELISA_2018-1-25"
+                data-gtm-category="d-header"
+                data-gtm-label="elisa"
+                data-gtm-action="click"
+              >ELISA ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/NGS%20Library%20Prep"
+                data-gtm-category="d-header"
+                data-gtm-label="ngs-prep"
+                data-gtm-action="click"
+              >NGS Library Prep ›</a>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com/categories/Basic%20Pipetting"
+                data-gtm-category="d-header"
+                data-gtm-label="basic"
+                data-gtm-action="click"
+              >Basic Pipetting ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu protocols sub-menu-protocols">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Protocols</span>
+          </div>
+          <ul>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-tools"
+                data-gtm-action="click"
+              >Protocol Options ›</a>
+              <span>Gain an overview of our protocol creation options</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://opentrons.com/protocols/designer"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-designer"
+                data-gtm-action="click"
+              >Protocol Designer ›</a>
+              <span>Use our graphical user interface to design protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://protocols.opentrons.com"
+                data-gtm-category="d-header"
+                data-gtm-label="protocol-library"
+                data-gtm-action="click"
+              >Protocol Library ›</a>
+              <span>Explore our open source database of protocols</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.opentrons.com/"
+                data-gtm-category="d-header"
+                data-gtm-label="opentrons-api"
+                data-gtm-action="click"
+              >Python API ›</a>
+              <span>
+                Maximum customization for anyone with python and basic weblab
+                skills
+              </span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/Opentrons"
+                data-gtm-category="d-header"
+                data-gtm-label="github-protocols"
+                data-gtm-action="click"
+              >Github ›</a>
+              <span>Contribute to open source protocol repository</span>
+            </li>
+            <li onclick="close()">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                class="blue"
+                href="https://opentrons.com/request-protocol"
+                data-gtm-category="d-header"
+                data-gtm-label="request-protocol-protocols"
+                data-gtm-action="click"
+              >Request a free custom protocol ›</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sub-menu sns sub-menu-sns">
+          <div class="sub-menu-div" onclick="closeMenu()">
+            <img src="https://s3.amazonaws.com/opentrons-images/website/arrow-icon.svg" alt>
+            <span>Support &amp; Sales</span>
+          </div>
+          <ul class="sns-ul">
+            <section class="sns-sales">
+              <!-- <span class="sales">SALES</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron">SALES</span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://shop.opentrons.com"
+                      data-gtm-category="d-header"
+                      data-gtm-label="shop"
+                      data-gtm-action="click"
+                      class="order-line-mobile"
+                    >Order online ›</a>
+                  </div>
+                </section>
+              </li>
+              <li onclick="close()">
+                <section class="sns-support-section">
+                  <span class="sales-tron mobile-contact"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="sales-link mobile-contact-sales"
+                      href="https://opentrons.com/contact"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-sales"
+                      data-gtm-action="click"
+                    >Contact sales ›</a>
+                  </div>
+                </section>
+              </li>
+              <li>
+                <section class="sns-support-section">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <!-- <a
+                      class="sales-link schedule-demo-mobile"
+                      data-gtm-category="d-header"
+                      data-gtm-label="schedule-demo"
+                      data-gtm-action="click"
+                      onclick="openModal('demo')"
+                    >Schedule a demo ›</a> -->
+                  </div>
+                </section>
+              </li>
+            </section>
+            <section class="sns-support">
+              <!-- <span class="support">SUPPORT</span> -->
+              <li onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron">SUPPORT</span>
+                  <div class="ot-2-start-guide support-items">
+                    <a
+                      href="https://support.opentrons.com/guide-for-getting-started-with-the-ot-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-gtm-category="d-header"
+                      data-gtm-label="start-guide"
+                      data-gtm-action="click"
+                      class="ot-2-guide"
+                    >OT-2 Start Guide ›</a>
+                    <span class="ot-2-guide">You received your robot, here's what's next</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://support.opentrons.com/"
+                      data-gtm-category="d-header"
+                      data-gtm-label="product-help"
+                      data-gtm-action="click"
+                    >Product Help ›</a>
+                    <span>Answer common technical questions</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://github.com/Opentrons"
+                      data-gtm-category="d-header"
+                      data-gtm-label="github-support"
+                      data-gtm-action="click"
+                    >Github ›</a>
+                    <span>Contribute to open source protocol repository</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://intercom.help/opentrons-protocol-designer/intro/opentrons-standard-labware"
+                      data-gtm-category="d-header"
+                      data-gtm-label="labware-library"
+                      data-gtm-action="click"
+                    >Labware Library ›</a>
+                    <span>Understand what labware is compatible with the OT-2</span>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div class="support-items">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://opentrons.com/ot-app"
+                      data-gtm-category="d-header"
+                      data-gtm-label="ot-app"
+                      data-gtm-action="click"
+                    >Install the app ›</a>
+                  </div>
+                </section>
+              </li>
+              <li class="sns-support-li" onclick="close()">
+                <section class="sns-support-section ot-2">
+                  <span class="sales-tron"></span>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="blue-text sales-link"
+                      href="https://opentrons.com/contact-support"
+                      data-gtm-category="d-header"
+                      data-gtm-label="contact-support"
+                      data-gtm-action="click"
+                    >Contact support ›</a>
+                  </div>
+                </section>
+              </li>
+            </section>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>   
+
+    <div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+                
+  <div class="section" id="complex-commands">
+<span id="v2-complex-commands"></span><h1>Complex Commands<a class="headerlink" href="#complex-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<span id="id1"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The difference between this section and <a class="reference internal" href="new_atomic_commands.html#v2-atomic-commands"><span class="std std-ref">Building Block Commands</span></a> is ease of use. With complex liquid handling commands, you can more easily handle larger
+groups of wells to perform repetitive actions. The main downside to using complex liquid handling commands is that you cannot control the
+order in which operations are executed. In this section we will order in which operations are executed. In this section we explain when and how specific actions are executed.</p>
+<p>The examples in this section will use the following set-up:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opentrons</span> <span class="kn">import</span> <span class="n">protocol_api</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">protocol</span><span class="p">:</span> <span class="n">protocol_api</span><span class="o">.</span><span class="n">ProtocolContext</span><span class="p">):</span>
+    <span class="n">plate</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;corning_96_wellplate_360ul_flat&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">tiprack</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_labware</span><span class="p">(</span><span class="s1">&#39;opentrons_96_tiprack_300ul&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">pipette</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">.</span><span class="n">load_instrument</span><span class="p">(</span><span class="s1">&#39;p300_single&#39;</span><span class="p">,</span> <span class="n">mount</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">tip_racks</span><span class="o">=</span><span class="p">[</span><span class="n">tiprack</span><span class="p">])</span>
+
+    <span class="c1"># The code used in the rest of the examples goes here</span>
+</pre></div>
+</div>
+<p>This loads a <a class="reference external" href="https://labware.opentrons.com/corning_96_wellplate_360ul_flat">Corning 96 Well Plate</a> in slot 1 and a <a class="reference external" href="https://labware.opentrons.com/opentrons_96_tiprack_300ul">Opentrons 300ul Tiprack</a> in slot 2, and uses a P300 Single pipette.</p>
+<p>You can follow along and simulate the protocol using our protocol simulator, which can be installed by following the instructions at <a class="reference internal" href="../writing.html#writing"><span class="std std-ref">Design with Python</span></a>.</p>
+<p>There are three general complex liquid handling commands. The differences can be found in the table below</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="27%" />
+<col width="28%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">One source well to a group of destination wells</th>
+<th class="head">Many source wells to a group of destination wells</th>
+<th class="head">Many source wells to one destination well</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.transfer" title="opentrons.protocol_api.contexts.InstrumentContext.transfer"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.transfer()</span></code></a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.distribute" title="opentrons.protocol_api.contexts.InstrumentContext.distribute"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.distribute()</span></code></a></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.consolidate" title="opentrons.protocol_api.contexts.InstrumentContext.consolidate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.consolidate()</span></code></a></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>You can also refer to these images for further clarification.</p>
+<div class="section" id="transfer">
+<span id="id2"></span><h3>Transfer<a class="headerlink" href="#transfer" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/transfer.png" id="id3"><img alt="../_images/transfer.png" class="align-center" id="id3" src="../_images/transfer.png" style="width: 693.0px; height: 469.5px;" /></a>
+</div>
+<div class="section" id="distribute">
+<span id="id4"></span><h3>Distribute<a class="headerlink" href="#distribute" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/robot_distribute.png" id="id5"><img alt="../_images/robot_distribute.png" class="align-center" id="id5" src="../_images/robot_distribute.png" style="width: 697.0px; height: 313.0px;" /></a>
+</div>
+<div class="section" id="consolidate">
+<span id="id6"></span><h3>Consolidate<a class="headerlink" href="#consolidate" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="../_images/robot_consolidate.png" id="id7"><img alt="../_images/robot_consolidate.png" class="align-center" id="id7" src="../_images/robot_consolidate.png" style="width: 697.0px; height: 313.0px;" /></a>
+<hr class="docutils" />
+</div>
+<div class="section" id="parameters">
+<span id="params-table"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Parameters for our complex liquid handling listed in order of operation. Check out the <a class="reference internal" href="#complex-params"><span class="std std-ref">Complex Liquid Handling Parameters</span></a> section for examples on how to use these parameters.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="29%" />
+<col width="15%" />
+<col width="19%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter(s)</th>
+<th class="head">Options</th>
+<th class="head">Transfer Defaults</th>
+<th class="head">Distribute Defaults</th>
+<th class="head">Consolidate Defaults</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">new_tip</span></code></td>
+<td><code class="docutils literal"><span class="pre">'always'</span></code>, <code class="docutils literal"><span class="pre">'never'</span></code>, <code class="docutils literal"><span class="pre">'once'</span></code></td>
+<td><code class="docutils literal"><span class="pre">'once'</span></code></td>
+<td><code class="docutils literal"><span class="pre">'once'</span></code></td>
+<td><code class="docutils literal"><span class="pre">'once'</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">mix_before</span></code>, <code class="docutils literal"><span class="pre">mix_after</span></code></td>
+<td><code class="docutils literal"><span class="pre">mix_before</span></code> and <code class="docutils literal"><span class="pre">mix_after</span></code> require a tuple
+of (repetitions, volume)</td>
+<td><blockquote class="first">
+<div>No mixing either before</div></blockquote>
+<p class="last">aspirate or after dispense</p>
+</td>
+<td>No mixing before aspirate,
+mixing after dispense is ignored</td>
+<td>Mixing before aspirate is ignored,
+no mix after dispense by default</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">touch_tip</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, if true touch tip on both
+source and destination wells</td>
+<td>No touch tip by default</td>
+<td>No touch tip by default</td>
+<td>No touch tip by default</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">air_gap</span></code></td>
+<td>Volume in microliters</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">blow_out</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, if true blow out at dispense</td>
+<td><code class="docutils literal"><span class="pre">False</span></code></td>
+<td><code class="docutils literal"><span class="pre">False</span></code></td>
+<td><code class="docutils literal"><span class="pre">False</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">trash</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, if false return tip to tiprack</td>
+<td><code class="docutils literal"><span class="pre">True</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">carryover</span></code></td>
+<td><code class="docutils literal"><span class="pre">True</span></code> or <code class="docutils literal"><span class="pre">False</span></code>, if true split volumes that
+exceed max volume of pipette into smaller quantities</td>
+<td><code class="docutils literal"><span class="pre">True</span></code></td>
+<td><code class="docutils literal"><span class="pre">False</span></code></td>
+<td><code class="docutils literal"><span class="pre">False</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">disposal_volume</span></code></td>
+<td>Extra volume in microliters to hold in tip while
+dispensing; better accuracies in multi-dispense</td>
+<td>0</td>
+<td>10% of pipette max volume</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>Transfer<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>The most versatile of the complex liquid handling functions is <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.transfer" title="opentrons.protocol_api.contexts.InstrumentContext.transfer"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.transfer()</span></code></a>. For a majority of use-cases you will most likely want to use this complex command.
+Below you will find a few scenarios utilizing the <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.transfer" title="opentrons.protocol_api.contexts.InstrumentContext.transfer"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.transfer()</span></code></a> command.</p>
+<div class="section" id="basic">
+<h3>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h3>
+<p>The example below will transfer 100 uL from well <code class="docutils literal"><span class="pre">'A1'</span></code> to well <code class="docutils literal"><span class="pre">'B1'</span></code>, automatically picking up a new tip and then disposing of it when finished.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;B1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Transfer commands will automatically create entire series of <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.aspirate" title="opentrons.protocol_api.contexts.InstrumentContext.aspirate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.aspirate()</span></code></a>, <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.dispense" title="opentrons.protocol_api.contexts.InstrumentContext.dispense"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.dispense()</span></code></a>, and other <code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext()</span></code> commands.</p>
+</div>
+<div class="section" id="large-volumes">
+<h3>Large Volumes<a class="headerlink" href="#large-volumes" title="Permalink to this headline">¶</a></h3>
+<p>Volumes larger than the pipette&#8217;s <code class="docutils literal"><span class="pre">max_volume</span></code> <a class="reference internal" href="new_pipette.html#defaults"><span class="std std-ref">Defaults</span></a> will automatically divide into smaller transfers.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;A2&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;B2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">700</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">300.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">300.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">200.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">200.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">200.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">200.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="one-to-one">
+<h3>One to One<a class="headerlink" href="#one-to-one" title="Permalink to this headline">¶</a></h3>
+<p>Transfer commands are most useful when moving liquid between multiple wells. Notice this will be a one to one transfer
+from where well <code class="docutils literal"><span class="pre">A1</span></code>&#8216;s contents are transferred to well <code class="docutils literal"><span class="pre">A2</span></code>, and so on and so forth. Refer to <span class="xref std std-ref">transfer</span> for better visualization.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...H1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A2</span><span class="o">...</span><span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">B1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">C1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">C2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">D1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">D2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">E1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">E2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">F1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">F2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">G1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">G2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">H1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="one-to-many">
+<h3>One to Many<a class="headerlink" href="#one-to-many" title="Permalink to this headline">¶</a></h3>
+<p>You can transfer from a single source to multiple destinations, and the other way around (many sources to one destination).</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A2</span><span class="o">...</span><span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">C2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">D2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">E2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">F2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">G2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-of-volumes">
+<h3>List of Volumes<a class="headerlink" href="#list-of-volumes" title="Permalink to this headline">¶</a></h3>
+<p>Instead of applying a single volume amount to all source/destination wells, you can instead pass a list of volumes.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">]</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">B1</span><span class="o">...</span><span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">20.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">20.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">40.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">40.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">60.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">60.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="distribute-and-consolidate">
+<h2>Distribute and Consolidate<a class="headerlink" href="#distribute-and-consolidate" title="Permalink to this headline">¶</a></h2>
+<p>Save time and tips with the <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.distribute" title="opentrons.protocol_api.contexts.InstrumentContext.distribute"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.distribute()</span></code></a> and <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.consolidate" title="opentrons.protocol_api.contexts.InstrumentContext.consolidate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.consolidate()</span></code></a> commands. These are nearly identical to <a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.transfer" title="opentrons.protocol_api.contexts.InstrumentContext.transfer"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.transfer()</span></code></a>, except that they will combine multiple transfers into a single tip.</p>
+<div class="section" id="id9">
+<h3>Consolidate<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>Volumes going to the same destination well are combined within the same tip, so that multiple aspirates can be combined to a single dispense. Refer to <span class="xref std std-ref">consolidate</span> for better visualization.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">consolidate</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;2&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;A1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Consolidating</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A2...H2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Transferring</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A2...H2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">B2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">C2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">D2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">E2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">F2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">G2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">H2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">240.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+<p>If there are multiple destination wells, the pipette will never combine their volumes into the same tip.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">consolidate</span><span class="p">(</span>
+  <span class="mi">30</span><span class="p">,</span>
+  <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;1&#39;</span><span class="p">],</span>
+  <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Consolidating</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...H1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Transferring</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...H1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">B1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">C1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">D1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">120.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">E1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">F1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">G1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Aspirating</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">H1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">120.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>Distribute<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>Volumes from the same source well are combined within the same tip, so that one aspirate can provide for multiple dispenses.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span> <span class="n">plate</span><span class="o">.</span><span class="n">rows_by_name</span><span class="p">()[</span><span class="s1">&#39;A&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Distributing</span> <span class="mi">55</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Transferring</span> <span class="mi">55</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">250.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A4</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">250.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A5</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A6</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A7</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A8</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">250.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A9</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A10</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A11</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">55.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+<p>If there are multiple source wells, the pipette will never combine their volumes into the same tip.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span>
+  <span class="mi">30</span><span class="p">,</span>
+  <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">]],</span>
+  <span class="n">plate</span><span class="o">.</span><span class="n">rows</span><span class="p">()[</span><span class="s1">&#39;A&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Distributing</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Transferring</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A1</span><span class="o">...</span><span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">210.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A4</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A5</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A6</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">210.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A7</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A8</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A9</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A10</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A11</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A12</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="re-visiting-order-of-operations">
+<h2>Re-Visiting Order of Operations<a class="headerlink" href="#re-visiting-order-of-operations" title="Permalink to this headline">¶</a></h2>
+<p>Given this sample code, what is the order of operations?</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">]],</span>
+    <span class="n">new_tip</span><span class="o">=</span><span class="s1">&#39;always&#39;</span><span class="p">,</span>
+    <span class="n">disposal_volume</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">touch_tip</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">air_gap</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">mix_before</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">mix_after</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">blow_out</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The order in which the parameters are listed inside of a complex method are irrelevant. Instead, the order in which
+parameters are executed is as follows:</p>
+<ol class="arabic simple">
+<li>Tip logic</li>
+<li>Mix at source location</li>
+<li>Aspirate + Any disposal volume</li>
+<li>Touch tip</li>
+<li>Air gap</li>
+<li>Dispense</li>
+<li>Touch tip</li>
+</ol>
+<p>&lt;&#8212;&#8212;Repeat above for all wells&#8212;&#8212;&gt;</p>
+<ol class="arabic simple" start="8">
+<li>Empty disposal volume into trash</li>
+<li>Blow Out</li>
+</ol>
+<p>Notice how blow out only occurs after getting rid of disposal volume. If you want blow out to occur after every dispense, you should not
+include a disposal volume.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="which-command-should-i-use">
+<h2>Which Command Should I Use?<a class="headerlink" href="#which-command-should-i-use" title="Permalink to this headline">¶</a></h2>
+<p>Now that you know a little more about the different complex liquid handling options, which one should you use?</p>
+<p>Each method handles groups of wells differently. We tried to encapsulate the different options you might encounter when utilizing complex commands in the table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="27%" />
+<col width="28%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">One source well to a group of destination wells</th>
+<th class="head">Many source wells to a group of destination wells</th>
+<th class="head">Many source wells to one destination well</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.transfer" title="opentrons.protocol_api.contexts.InstrumentContext.transfer"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.transfer()</span></code></a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.distribute" title="opentrons.protocol_api.contexts.InstrumentContext.distribute"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.distribute()</span></code></a></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="new_protocol_api.html#opentrons.protocol_api.contexts.InstrumentContext.consolidate" title="opentrons.protocol_api.contexts.InstrumentContext.consolidate"><code class="xref py py-meth docutils literal"><span class="pre">InstrumentContext.consolidate()</span></code></a></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>You can also check out this other table below on how each method compares for things such as contamination or speed. If a method is intended for a particular category,
+it is marked with an <code class="docutils literal"><span class="pre">X</span></code>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="16%" />
+<col width="14%" />
+<col width="27%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">Accuracy</th>
+<th class="head">Speed</th>
+<th class="head">Waste Reduction</th>
+<th class="head">Contamination</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Transfer</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+</tr>
+<tr class="row-odd"><td>Distribute</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Consolidate</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+<div class="section" id="complex-liquid-handling-parameters">
+<span id="complex-params"></span><h2>Complex Liquid Handling Parameters<a class="headerlink" href="#complex-liquid-handling-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Below are some examples of the parameters described in <a class="reference internal" href="#params-table"><span class="std std-ref">Parameters</span></a>.</p>
+<div class="section" id="new-tip">
+<h3>new_tip<a class="headerlink" href="#new-tip" title="Permalink to this headline">¶</a></h3>
+<p>This parameter handles tip logic. You have options of <code class="docutils literal"><span class="pre">always</span></code>, <code class="docutils literal"><span class="pre">once</span></code> and <code class="docutils literal"><span class="pre">never</span></code>. The default for every complex command is <code class="docutils literal"><span class="pre">once</span></code>.</p>
+<p>If you want to avoid cross-contamination and increase accuracy, you should set this parameter to <code class="docutils literal"><span class="pre">always</span></code>.</p>
+<div class="section" id="always-get-a-new-tip">
+<h4>Always Get a New Tip<a class="headerlink" href="#always-get-a-new-tip" title="Permalink to this headline">¶</a></h4>
+<p>Transfer commands will by default use the same one tip for each well, then finally drop it in the trash once finished.</p>
+<p>The pipette can optionally get a new tip at the beginning of each aspirate, to help avoid cross contamination.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">]],</span>
+    <span class="n">new_tip</span><span class="o">=</span><span class="s1">&#39;always&#39;</span><span class="p">)</span>    <span class="c1"># always pick up a new tip</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A3</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">B1</span><span class="o">...</span><span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">C1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A3</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="never-get-a-new-tip">
+<h4>Never Get a New Tip<a class="headerlink" href="#never-get-a-new-tip" title="Permalink to this headline">¶</a></h4>
+<p>For scenarios where you instead are calling <code class="docutils literal"><span class="pre">pick_up_tip()</span></code> and <code class="docutils literal"><span class="pre">drop_tip()</span></code> elsewhere in your protocol, the transfer command can ignore picking up or dropping tips.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">pick_up_tip</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">]],</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">]],</span>
+    <span class="n">new_tip</span><span class="o">=</span><span class="s1">&#39;never&#39;</span><span class="p">)</span>    <span class="c1"># never pick up or drop a tip</span>
+<span class="o">...</span>
+<span class="n">pipette</span><span class="o">.</span><span class="n">drop_tip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="o">...</span>
+<span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A3</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">B1</span><span class="o">...</span><span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A3</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B3</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="o">...</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="trash">
+<h3>trash<a class="headerlink" href="#trash" title="Permalink to this headline">¶</a></h3>
+<p>By default, the transfer command will drop the pipette&#8217;s tips in the trash container. However, if you wish to instead return the tip to its tip rack, you can set <code class="docutils literal"><span class="pre">trash=False</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">],</span>
+    <span class="n">trash</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>       <span class="c1"># do not trash tip</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Returning</span> <span class="n">tip</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touch-tip">
+<h3>touch_tip<a class="headerlink" href="#touch-tip" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="new_atomic_commands.html#touch-tip"><span class="std std-ref">Touch Tip</span></a> can be performed after every aspirate and dispense by setting <code class="docutils literal"><span class="pre">touch_tip=True</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">],</span>
+    <span class="n">touch_tip</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>     <span class="c1"># touch tip to each well&#39;s edge</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Touching</span> <span class="n">tip</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Touching</span> <span class="n">tip</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="blow-out">
+<h3>blow_out<a class="headerlink" href="#blow-out" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="new_atomic_commands.html#blow-out"><span class="std std-ref">Blow Out</span></a> can be performed after every dispense that leaves the tip empty by setting <code class="docutils literal"><span class="pre">blow_out=True</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">],</span>
+    <span class="n">blow_out</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>      <span class="c1"># blow out droplets when tip is empty</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mix-before-mix-after">
+<h3>mix_before, mix_after<a class="headerlink" href="#mix-before-mix-after" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="new_atomic_commands.html#mix"><span class="std std-ref">Mix</span></a> can be performed before every aspirate by setting <code class="docutils literal"><span class="pre">mix_before=</span></code>. The value of <code class="docutils literal"><span class="pre">mix_before=</span></code> must be a tuple, the 1st value is the number of repetitions, the 2nd value is the amount of liquid to mix.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">],</span>
+    <span class="n">mix_before</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="c1"># mix 2 times with 50uL before aspirating</span>
+    <span class="n">mix_after</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">75</span><span class="p">))</span>  <span class="c1"># mix 3 times with 75uL after dispensing</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Mixing</span> <span class="mi">2</span> <span class="n">times</span> <span class="k">with</span> <span class="n">a</span> <span class="n">volume</span> <span class="n">of</span> <span class="mi">50</span><span class="n">ul</span>
+<span class="n">Aspirating</span> <span class="mi">50</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mi">50</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mi">50</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mi">50</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Mixing</span> <span class="mi">3</span> <span class="n">times</span> <span class="k">with</span> <span class="n">a</span> <span class="n">volume</span> <span class="n">of</span> <span class="mi">75</span><span class="n">ul</span>
+<span class="n">Aspirating</span> <span class="mi">75</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">75.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mi">75</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">75.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Aspirating</span> <span class="mi">75</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">75.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="air-gap">
+<h3>air_gap<a class="headerlink" href="#air-gap" title="Permalink to this headline">¶</a></h3>
+<p>An <a class="reference internal" href="new_atomic_commands.html#air-gap"><span class="std std-ref">Air Gap</span></a> can be performed after every aspirate by setting <code class="docutils literal"><span class="pre">air_gap=int</span></code>, where the value is the volume of air in microliters to aspirate after aspirating the liquid.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">],</span>
+    <span class="n">plate</span><span class="p">[</span><span class="s1">&#39;A2&#39;</span><span class="p">],</span>
+    <span class="n">air_gap</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>         <span class="c1"># add 20uL of air after each aspirate</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Transferring</span> <span class="mi">100</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Air</span> <span class="n">gap</span>
+<span class="n">Aspirating</span> <span class="mi">20</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mf">1.0</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mi">20</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">100.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disposal-volume">
+<h3>disposal_volume<a class="headerlink" href="#disposal-volume" title="Permalink to this headline">¶</a></h3>
+<p>When dispensing multiple times from the same tip, it is recommended to aspirate an extra amount of liquid to be disposed of after distributing. This added <code class="docutils literal"><span class="pre">disposal_vol</span></code> can be set as an optional argument.</p>
+<p>There is a default disposal volume (equal to the pipette&#8217;s minimum volume <a class="reference internal" href="new_pipette.html#defaults"><span class="std std-ref">Defaults</span></a>), which will be blown out at the trash after the dispenses.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pipette</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">plate</span><span class="o">.</span><span class="n">wells_by_name</span><span class="p">()[</span><span class="n">well_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">]],</span>
+    <span class="n">plate</span><span class="o">.</span><span class="n">columns_by_name</span><span class="p">()[</span><span class="s1">&#39;2&#39;</span><span class="p">],</span>
+    <span class="n">disposal_volume</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>   <span class="c1"># include extra liquid to make dispenses more accurate, 20% of total volume</span>
+</pre></div>
+</div>
+<p>will have the steps...</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Distributing</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A2</span><span class="o">...</span><span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Transferring</span> <span class="mi">30</span> <span class="kn">from</span> <span class="nn">wells</span> <span class="nn">A1...A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">to</span> <span class="n">wells</span> <span class="n">A2</span><span class="o">...</span><span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Picking</span> <span class="n">up</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;2&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">130.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A1</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">A2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">B2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">C2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">D2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Aspirating</span> <span class="mf">130.0</span> <span class="n">uL</span> <span class="kn">from</span> <span class="nn">well</span> <span class="nn">A2</span> <span class="nn">in</span> <span class="s2">&quot;1&quot;</span> <span class="n">at</span> <span class="mi">1</span> <span class="n">speed</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">E2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">F2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">G2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Dispensing</span> <span class="mf">30.0</span> <span class="n">uL</span> <span class="n">into</span> <span class="n">well</span> <span class="n">H2</span> <span class="ow">in</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">Blowing</span> <span class="n">out</span> <span class="n">at</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">Dropping</span> <span class="n">tip</span> <span class="n">well</span> <span class="n">A1</span> <span class="ow">in</span> <span class="s2">&quot;12&quot;</span>
+</pre></div>
+</div>
+<p>See this image for example,</p>
+<a class="reference internal image-reference" href="../_images/distribute_illustration_tip.png"><img alt="../_images/distribute_illustration_tip.png" class="align-center" src="../_images/distribute_illustration_tip.png" style="width: 248.0px; height: 238.0px;" /></a>
+</div>
+</div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Opentrons API</a></h1>
+
+
+
+<p class="blurb">Simple Biology Lab Protocol Coding</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=opentrons&repo=opentrons&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<!-- Navbar override to always show hidden toctree elements in sidebar
+     Think of this like a file (or subdirectory) specific override to
+     the :showhidden: toctree directive or sidebar_show_hidden config
+     variable. Can be removed when APIV2 is public and includehidden
+     set back to theme_sidebar_showhidden
+-->
+<h3>Table Of Contents</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writing.html">Design with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v1/apiv1index.html">Opentrons API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="apiv2index.html">Opentrons API Version 2</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="new_pipette.html">Pipettes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_labware.html">Labware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_modules.html">Hardware Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_atomic_commands.html">Building Block Commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Complex Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transfer">Transfer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distribute">Distribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#consolidate">Consolidate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Transfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic">Basic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#large-volumes">Large Volumes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#one-to-one">One to One</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#one-to-many">One to Many</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-of-volumes">List of Volumes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#distribute-and-consolidate">Distribute and Consolidate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Consolidate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Distribute</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#re-visiting-order-of-operations">Re-Visiting Order of Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#which-command-should-i-use">Which Command Should I Use?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#complex-liquid-handling-parameters">Complex Liquid Handling Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#new-tip">new_tip</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#always-get-a-new-tip">Always Get a New Tip</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#never-get-a-new-tip">Never Get a New Tip</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#trash">trash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touch-tip">touch_tip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blow-out">blow_out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mix-before-mix-after">mix_before, mix_after</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#air-gap">air_gap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disposal-volume">disposal_volume</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="new_protocol_api.html">API Version 2 Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new_advanced_running.html">Running Protocols Directly On The Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apiv2index.html#overview">Overview</a></li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/OpentronsAPI.pdf">Download As PDF</a></li>
+    
+    <li class="toctree-l1"><a href="https://docs.opentrons.com/ot1/index.html">OT 1 API</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="apiv2index.html">Opentrons API Version 2</a><ul>
+      <li>Previous: <a href="new_atomic_commands.html" title="previous chapter">Building Block Commands</a></li>
+      <li>Next: <a href="new_protocol_api.html" title="next chapter">API Version 2 Reference</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer>
+  <div class="wrapper">
+
+    <section class="social-signup">
+      <div class="social-links">
+        <a href="https://www.facebook.com/OpenTrons-Labworks/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Facebook"
+        ><img src="https://s3.amazonaws.com/opentrons-images/website/logo_facebook.png" alt="facebook logo"/></a>
+        <a href="https://twitter.com/OpenTrons_" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Twitter"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_twitter.png" alt="twitter logo" /></a>
+        <a href="https://www.instagram.com/opentronslab/" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Instagram"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_instagram.png" alt="instagram logo" /></a>
+        <a href="https://www.youtube.com/channel/UCvMRmXIxnHs3AutkVhuqaQg" target="_blank"
+        ga-on="click"
+        ga-event-category="Social"
+        ga-event-action="Open Youtube"><img src="https://s3.amazonaws.com/opentrons-images/website/logo_youtube.png" alt="youtube logo" /></a>
+      </div>
+      <h3>Sign Up For Our Newsletter</h3>
+      <div id="mc_embed_signup">
+        <form action="//opentrons.us8.list-manage.com/subscribe/post?u=000595683fb96c5fb3c54cf53&amp;id=ba66060a9c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <input type="email" value="" name="EMAIL" class="email-newsletter" id="mce-EMAIL" placeholder="email address" required
+            ga-on="input"
+            ga-event-category="Mailchimp"
+            ga-event-action="Enter Email"
+            >
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_000595683fb96c5fb3c54cf53_ba66060a9c" tabindex="-1" value=""></div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="gray subscribe"
+            ga-on="click"
+            ga-event-category="Mailchimp"
+            ga-event-action="Newsletter Signup">
+          </div>
+        </form>
+      </div>
+      <p class="copyrite">&#169;&nbsp;OPENTRONS <script type="text/javascript">document.write(new Date().getFullYear())</script></p>
+    </section>
+    <section class="footer-menu">
+      <ul>
+        <li>Products</li>
+        <li><a href="https://opentrons.com/robots" >OT-One</a></li>
+        <li><a href="https://opentrons.com/ot-2" >OT-2</a></li>
+        <li><a href="https://opentrons.com/pipettes" >OT-2 Pipettes</a></li>
+        <li><a href="https://opentrons.com/modules" >Modules</a></li>
+        <li><a href="https://opentrons.com/ot-app" >OT App</a></li>
+        <li><a href="https://protocols.opentrons.com/" target="_blank">Protocol Library</a></li>
+      </ul>
+      <ul>
+        <li>Company</li>
+        <li><a href="https://opentrons.com/about" >About</a></li>
+        <li><a href="https://opentrons.com/team" >Team</a></li>
+        <li><a href="https://blog.opentrons.com/">Blog</a></li>
+        <li><a href="https://opentrons.com/contact" >Contact Us</a></li>
+        <li><a href="https://opentrons.com/jobs" target="_blank" class="hiring">WE'RE HIRING</a></li>
+      </ul>
+      <ul>
+        <li>Resources</li>
+        <li><a href="https://support.opentrons.com" target="_blank">Support</a></li>
+          <li><a href="http://docs.opentrons.com/" target="_blank">Opentrons API</a></li>
+          <li><a href="https://github.com/Opentrons/opentrons/blob/edge/CONTRIBUTING.md" target="_blank">Open Source</a></li>
+      </ul>
+      <ul>
+        <li><a href="https://shop.opentrons.com/" class="buy">Buy</a></li>
+      </ul>
+
+    </section>
+
+  </div>
+</footer>
+<script>
+
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCDX9CX');
+
+</script>
+<script>
+  function toggleMenu(menu) {
+    var element = document.querySelector(`#${menu}`)
+    var elementList = document.querySelectorAll('.navbar-ul')
+    elementList.forEach(e => {
+      if (e !== element) {
+        e.previousElementSibling.classList.add('notActive')
+        e.classList.add('visible')
+      }
+    })
+    if (!element.classList.contains('visible')) {
+      element.classList.add('visible')
+      elementList.forEach(e => {
+        e.previousElementSibling.classList.remove('notActive')
+      })
+    } else {
+      element.classList.remove('visible')
+      element.previousElementSibling.classList.remove('notActive')
+    }
+  }
+  function close() {
+    var elementList = document.querySelectorAll('.navbar-ul')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    elementList.forEach(e => {
+      e.classList.add('visible')
+      e.previousElementSibling.classList.remove('notActive')
+    })
+    subMenu.forEach(e => {
+      e.classList.remove('showmenu')
+      console.dir(e)
+    })
+  }
+  function toggleOpen() {
+    var mobile = document.querySelector('.mobile-hamburger')
+    var mobileMenu = document.querySelector('.mobile-menu')
+    var subMenu = document.querySelectorAll('.sub-menu')
+    if (mobileMenu.classList.contains('dnone')) {
+      mobileMenu.classList.remove('dnone')
+    } else {
+      mobileMenu.classList.add('dnone')
+    }
+    subMenu.forEach(e => {
+      if(e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+    mobile.classList.toggle('open')
+    document.body.classList.toggle('mobile-scrolling')
+  }
+  function showMenu(menu) {
+    var element = document.querySelector(`.sub-menu-${menu}`)
+    if (element.classList.contains('showmenu')) {
+      element.classList.remove('showmenu')
+    } else {
+      element.classList.add('showmenu')
+    }
+  }
+  function closeMenu() {
+    var element = document.querySelectorAll('.sub-menu')
+    element.forEach(e => {
+      if (e.classList.contains('showmenu')) {
+        e.classList.remove('showmenu')
+      }
+    })
+  }
+  var navbar = document.querySelector('.navbar-menu')
+  document.addEventListener('click', function(event) {
+    var isClickInside = navbar.contains(event.target)
+    if (!isClickInside && window.innerWidth >= 1024) {
+      close()
+    }
+  })
+
+  </script>
+
+
+ 
+  </body>
+</html>
