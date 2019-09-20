@@ -49,9 +49,6 @@ def _build_temp_code(temp, hold_time=None):
 
 TC_BAUDRATE = 115200
 TC_BOOTLOADER_BAUDRATE = 1200
-# TODO (Laura 20190327) increased the thermocycler command timeout
-# temporarily until we can change the firmware to asynchronously handle
-# the lid being open and closed
 SERIAL_ACK = '\r\n'
 TC_COMMAND_TERMINATOR = SERIAL_ACK
 TC_ACK = 'ok' + SERIAL_ACK + 'ok' + SERIAL_ACK

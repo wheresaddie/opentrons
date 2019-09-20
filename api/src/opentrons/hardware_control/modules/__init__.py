@@ -91,7 +91,7 @@ async def update_firmware(
         # which in this case is actually a drive
         # will probably have to discover modules again
         # so you get the new port name, then create an instance
-        log.debug('here we write the firmware file')
+        log.debug(f'here we write the firmware file, file: {firmware_file}, flashport {flash_port}')
     else:
         after_port, results = await update.update_firmware(flash_port,
                                                        firmware_file,

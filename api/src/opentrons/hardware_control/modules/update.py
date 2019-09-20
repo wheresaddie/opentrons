@@ -34,11 +34,14 @@ async def enter_bootloader(driver, model):
     new_port = ''
     try:
         if model == 'thermocycler':
-            # look for a volume in /media called tcb
-            print('look for a volumen in /media')
-        new_port = await asyncio.wait_for(
-            _port_poll(_has_old_bootloader(model), ports_before_dfu_mode),
-            PORT_SEARCH_TIMEOUT)
+            for volume in os.listdir('/media'):
+                log.debug(f'vol in media: {volume}')
+                if volume.startswith('tcb'):
+                    new_port = volume
+        else:
+            new_port = await asyncio.wait_for(
+                _port_poll(_has_old_bootloader(model), ports_before_dfu_mode),
+                PORT_SEARCH_TIMEOUT)
     except asyncio.TimeoutError:
         pass
     return new_port

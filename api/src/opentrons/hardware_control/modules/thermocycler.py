@@ -3,6 +3,8 @@ from . import mod_abc, types
 from typing import Union, Optional, List, Callable
 from opentrons.drivers.thermocycler.driver import (
     Thermocycler as ThermocyclerDriver)
+
+from opentrons.hardware_control.modules import update
 import logging
 
 MODULE_LOG = logging.getLogger(__name__)

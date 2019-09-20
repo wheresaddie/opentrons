@@ -2,8 +2,10 @@ import logging
 import asyncio
 import tempfile
 from aiohttp import web
-from opentrons import modules
+# from opentrons import modules
 from opentrons.config import feature_flags as ff
+from opentrons.hardware_control import modules
+from opentrons.hardware_control.modules import update
 
 log = logging.getLogger(__name__)
 UPDATE_TIMEOUT = 15
@@ -67,16 +69,18 @@ async def _upload_to_module(hw, serialnum, fw_filename, loop):
         if not hw.is_connected():
             hw.connect()
 
-    hw.discover_modules()
+    await hw.discover_modules()
     hw_mods = hw.attached_modules.values()
 
+    log.info(f"hw_mods: {hw_mods}")
     res = {}
     for module in hw_mods:
+        log.info(f"module serial: {module.device_info.get('serial')}, specified serial {serialnum}")
+        log.info("Module with serial {} found".format(serialnum))
         if module.device_info.get('serial') == serialnum:
-            log.info("Module with serial {} found".format(serialnum))
-            bootloader_port = await modules.enter_bootloader(module)
-            if bootloader_port:
-                module._port = bootloader_port
+            # bootloader_port = await module.prep_for_update()
+            # if bootloader_port:
+                # module._port = bootloader_port
             # else assume old bootloader connection on existing module port
             log.info("Uploading file to port: {}".format(
                 module.port))
